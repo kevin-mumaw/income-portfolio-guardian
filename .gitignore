@@ -1,0 +1,6 @@
+token.json
+__pycache__/
+*.pyc
+venv/
+.env
+data/distributions.csv

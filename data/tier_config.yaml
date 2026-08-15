@@ -1,0 +1,58 @@
+# Single source of truth for tier targets and fund->tier mapping.
+# Edit this file when you add/remove a holding or change target %s.
+# tier_drift.py reads this directly -- no need to touch the script
+# to rebalance targets or reclassify a fund.
+#
+# Holdings are a list, not a dict keyed by symbol, because the same
+# ticker can legitimately sit in more than one account (e.g. YMAX in
+# both taxable and Roth) with different intent/status per position.
+
+targets:
+  tier_1: 0.50   # capital preservation / long-horizon compounding
+  tier_2: 0.35   # diversified weekly option-premium income
+  tier_3: 0.15   # max instant monthly cash flow / highest decay risk
+
+holdings:
+  - symbol: O
+    tier: 1
+    account: taxable
+
+  - symbol: THW
+    tier: 2                # equity CEF, managed distribution -- not capital preservation
+    account: taxable
+
+  - symbol: YMAX
+    tier: 2
+    account: taxable
+    note: "marked for sale after next distribution -- see DECISIONS.md"
+
+  - symbol: VOO
+    tier: 1
+    account: roth
+
+  - symbol: YMAX
+    tier: 2
+    account: roth
+
+  - symbol: MSTY
+    tier: 3
+    account: roth
+
+  - symbol: CONY
+    tier: 3
+    account: roth
+
+# Not currently held -- tracked here so tier placement is decided
+# in advance, before capital moves (see rollover_calc.py, planned).
+watchlist:
+  - symbol: GOF
+    proposed_tier: 2   # leveraged credit CEF -- Tier 2, not Tier 1, see DECISIONS.md
+  - symbol: PDI
+    proposed_tier: 2   # leveraged credit CEF -- Tier 2, not Tier 1, see DECISIONS.md
+  - symbol: FEPI
+    proposed_tier: 2
+
+decay_warning_rule:
+  roc_pct_threshold: 0.90
+  consecutive_periods: 3
+  require_concurrent_price_decline: true
