@@ -1,54 +1,26 @@
 """
 tier_drift.py
 
-Computes actual portfolio allocation by tier (from live Schwab positions)
-against the target %s in data/tier_config.yaml, and reports which tier
-the next new dollar should go to in order to close the largest gap.
+Computes actual portfolio allocation by tier against the target %s in
+data/tier_config.yaml, using manually-entered share counts from
+data/positions.yaml and live prices from yfinance. No brokerage login,
+no token, no OAuth -- update positions.yaml by hand when you trade.
 
 Usage:
     python screener/tier_drift.py
     python screener/tier_drift.py --new-capital 37000
-
-Requires: token.json at repo root (schwab-py OAuth2 token), same pattern
-as options-bot. Run with venv active from repo root.
 """
 
 import argparse
-import os
 from pathlib import Path
 
 import pandas as pd
 import yaml
-from dotenv import load_dotenv
+import yfinance as yf
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-load_dotenv(REPO_ROOT / ".env")
-
 CONFIG_PATH = REPO_ROOT / "data" / "tier_config.yaml"
-
-ACCOUNT_HASH_MAP = {
-    "taxable": os.getenv("SCHWAB_ACCOUNT_HASH_TAXABLE"),
-    "roth": os.getenv("SCHWAB_ACCOUNT_HASH_ROTH"),
-}
-
-_schwab_client_cache = None
-
-
-def get_schwab_client():
-    global _schwab_client_cache
-    if _schwab_client_cache is not None:
-        return _schwab_client_cache
-    from schwab.auth import client_from_token_file
-
-    api_key = os.getenv("SCHWAB_APP_KEY")
-    app_secret = os.getenv("SCHWAB_APP_SECRET")
-    token_path = os.getenv("SCHWAB_TOKEN_PATH", str(REPO_ROOT / "token.json"))
-    if not api_key or not app_secret:
-        raise RuntimeError("SCHWAB_APP_KEY / SCHWAB_APP_SECRET not set in .env")
-    _schwab_client_cache = client_from_token_file(
-        token_path, api_key, app_secret, enforce_enums=False
-    )
-    return _schwab_client_cache
+POSITIONS_PATH = REPO_ROOT / "data" / "positions.yaml"
 
 
 def load_config() -> dict:
@@ -56,30 +28,34 @@ def load_config() -> dict:
         return yaml.safe_load(f)
 
 
+def load_positions() -> dict:
+    with open(POSITIONS_PATH, "r") as f:
+        return yaml.safe_load(f)
+
+
 def get_live_positions() -> pd.DataFrame:
-    client = get_schwab_client()
+    positions_data = load_positions()
     rows = []
 
-    for account_label, account_hash in ACCOUNT_HASH_MAP.items():
-        if not account_hash:
-            raise RuntimeError(
-                "No account hash set for '" + account_label + "'. Run "
-                "scripts/get_account_hashes.py once and set "
-                "SCHWAB_ACCOUNT_HASH_" + account_label.upper() + " in .env."
-            )
-        resp = client.get_account(account_hash, fields=["positions"])
-        resp.raise_for_status()
-        data = resp.json()
+    symbols = list({p["symbol"] for p in positions_data["positions"]})
+    prices = {}
+    for sym in symbols:
+        ticker = yf.Ticker(sym)
+        hist = ticker.history(period="1d")
+        if hist.empty:
+            print("WARNING: no price found for " + sym + ", skipping")
+            continue
+        prices[sym] = float(hist["Close"].iloc[-1])
 
-        positions = data.get("securitiesAccount", {}).get("positions", [])
-        for pos in positions:
-            symbol = pos.get("instrument", {}).get("symbol")
-            market_value = pos.get("marketValue")
-            if symbol is None or market_value is None:
-                continue
-            rows.append(
-                {"symbol": symbol, "account": account_label, "market_value": market_value}
-            )
+    for p in positions_data["positions"]:
+        symbol = p["symbol"]
+        shares = p.get("shares", 0.0)
+        if shares <= 0 or symbol not in prices:
+            continue
+        market_value = shares * prices[symbol]
+        rows.append(
+            {"symbol": symbol, "account": p["account"], "market_value": market_value}
+        )
 
     return pd.DataFrame(rows, columns=["symbol", "account", "market_value"])
 
@@ -171,6 +147,11 @@ def main():
 
     config = load_config()
     positions = get_live_positions()
+
+    if positions.empty:
+        print("No positions found -- fill in real share counts in data/positions.yaml first.")
+        return
+
     summary = compute_drift(positions, config)
 
     print(summary.to_string(index=False))

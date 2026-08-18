@@ -1,0 +1,37 @@
+# Your actual holdings -- update this by hand whenever you buy or sell.
+# No login, no API, no token needed. tier_drift.py reads this directly
+# and pulls live prices from yfinance to compute current values.
+
+positions:
+  - symbol: O
+    account: taxable
+    shares: 1.589425
+
+  - symbol: THW
+    account: taxable
+    shares: 3.57687
+
+  - symbol: YMAX
+    account: taxable
+    shares: 6.510416
+    note: "marked for sale after next distribution"
+
+  - symbol: XYLD
+    account: roth
+    shares: 4.000000
+
+  - symbol: VOO
+    account: roth
+    shares: 0.035
+
+  - symbol: YMAX
+    account: roth
+    shares: 19.507881
+
+  - symbol: MSTY
+    account: roth
+    shares: 4.108463
+
+  - symbol: CONY
+    account: roth
+    shares: 2.742731

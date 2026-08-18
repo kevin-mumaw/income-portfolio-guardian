@@ -42,6 +42,10 @@ holdings:
     tier: 3
     account: roth
 
+  - symbol: XYLD
+    tier: 3                # replacement candidate for MSTY/CONY -- diversified, less NAV decay
+    account: roth
+
 # Not currently held -- tracked here so tier placement is decided
 # in advance, before capital moves (see rollover_calc.py, planned).
 watchlist:
