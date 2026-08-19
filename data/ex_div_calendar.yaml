@@ -1,0 +1,45 @@
+# Manually-maintained ex-dividend calendar. Update dates as sponsors
+# announce them (weekly for YieldMax funds, monthly/quarterly for others).
+# No live API -- same lesson as positions.yaml, manual entry is the
+# reliable option after this weekend.
+
+holdings:
+  - symbol: O
+    account: taxable
+    frequency: monthly
+    next_ex_date: "2026-08-31"   # UPDATE as confirmed
+
+  - symbol: THW
+    account: taxable
+    frequency: monthly
+    next_ex_date: "2026-08-22"   # UPDATE as confirmed
+
+  - symbol: YMAX
+    account: taxable
+    frequency: weekly
+    next_ex_date: "2026-08-19"   # UPDATE weekly
+
+  - symbol: VOO
+    account: roth
+    frequency: quarterly
+    next_ex_date: "2026-09-28"
+
+  - symbol: YMAX
+    account: roth
+    frequency: weekly
+    next_ex_date: "2026-08-19"   # UPDATE weekly
+
+  - symbol: MSTY
+    account: roth
+    frequency: weekly
+    next_ex_date: "2026-08-19"   # UPDATE weekly
+
+  - symbol: CONY
+    account: roth
+    frequency: weekly
+    next_ex_date: "2026-08-19"   # UPDATE weekly
+
+  - symbol: XYLD
+    account: roth
+    frequency: monthly
+    next_ex_date: "2026-09-24"   # UPDATE as confirmed
