@@ -20,6 +20,10 @@ positions:
     account: roth
     shares: 4.000000
 
+  - symbol: RYLD
+    account: roth
+    shares: 3.420157
+
   - symbol: VOO
     account: roth
     shares: 0.035

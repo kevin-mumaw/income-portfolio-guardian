@@ -46,6 +46,10 @@ holdings:
     tier: 3                # replacement candidate for MSTY/CONY -- diversified, less NAV decay
     account: roth
 
+  - symbol: RYLD
+    tier: 3                # small-cap covered call -- non-tech diversification vs MSTY/CONY
+    account: roth
+
 # Not currently held -- tracked here so tier placement is decided
 # in advance, before capital moves (see rollover_calc.py, planned).
 watchlist:
@@ -55,6 +59,24 @@ watchlist:
     proposed_tier: 2   # leveraged credit CEF -- Tier 2, not Tier 1, see DECISIONS.md
   - symbol: FEPI
     proposed_tier: 2
+  - symbol: SPYI
+    proposed_tier: 2   # diversified S&P 500 covered call, Section 1256 tax treatment
+  - symbol: STK
+    proposed_tier: 2   # tech CEF, 2026 distributions 100% realized cap gains, not ROC
+  - symbol: IDVO
+    proposed_tier: 2   # international diversification, covered call
+  - symbol: JEPI
+    proposed_tier: 2   # diversified S&P 500, selective ELN overlay, lower cap on upside than XYLD
+  - symbol: DIVO
+    proposed_tier: 2   # blue-chip dividend payers, tactical covered calls, lower tech weight
+  - symbol: PFFA
+    proposed_tier: 2   # preferred stock income, financials/utilities heavy, non-equity diversifier
+  - symbol: ARCC
+    proposed_tier: 2   # BDC, real earnings coverage, no options overlay
+  - symbol: MAIN
+    proposed_tier: 2   # BDC, real earnings coverage, monthly + supplemental div
+  - symbol: UTG
+    proposed_tier: 1   # utility CEF, lower volatility, Tier 1/2 boundary candidate
 
 decay_warning_rule:
   roc_pct_threshold: 0.90

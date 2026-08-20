@@ -43,3 +43,8 @@ holdings:
     account: roth
     frequency: monthly
     next_ex_date: "2026-09-24"   # UPDATE as confirmed
+
+  - symbol: RYLD
+    account: roth
+    frequency: monthly
+    next_ex_date: "2026-09-24"   # UPDATE as confirmed -- verify actual date, assumed same cycle as XYLD
