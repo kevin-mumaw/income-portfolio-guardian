@@ -18,7 +18,7 @@ positions:
 
   - symbol: XYLD
     account: roth
-    shares: 4.000000
+    shares: 6.400960
 
   - symbol: RYLD
     account: roth
@@ -26,11 +26,11 @@ positions:
 
   - symbol: VOO
     account: roth
-    shares: 0.035
+    shares: 0.177033
 
   - symbol: YMAX
     account: roth
-    shares: 19.507881
+    shares: 45.823670
 
   - symbol: MSTY
     account: roth
@@ -38,4 +38,4 @@ positions:
 
   - symbol: CONY
     account: roth
-    shares: 2.742731
+    shares: 7.769119
