@@ -3,30 +3,21 @@
 # and pulls live prices from yfinance to compute current values.
 
 positions:
-  - symbol: O
-    account: taxable
-    shares: 1.589425
-
   - symbol: THW
     account: taxable
     shares: 3.57687
-
-  - symbol: YMAX
-    account: taxable
-    shares: 6.510416
-    note: "marked for sale after next distribution"
 
   - symbol: XYLD
     account: roth
     shares: 6.400960
 
-  - symbol: RYLD
+  - symbol: SPYI
     account: roth
-    shares: 3.420157
+    shares: 19.465531
 
   - symbol: VOO
     account: roth
-    shares: 0.462252
+    shares: 1.101806
 
   - symbol: YMAX
     account: roth
@@ -34,7 +25,7 @@ positions:
 
   - symbol: MSTY
     account: roth
-    shares: 4.108463
+    shares: 7.508667
 
   - symbol: CONY
     account: roth

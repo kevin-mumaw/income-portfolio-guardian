@@ -13,18 +13,9 @@ targets:
   tier_3: 0.1875 # max instant monthly cash flow / highest decay risk
 
 holdings:
-  - symbol: O
-    tier: 1
-    account: taxable
-
   - symbol: THW
     tier: 2                # equity CEF, managed distribution -- not capital preservation
     account: taxable
-
-  - symbol: YMAX
-    tier: 2
-    account: taxable
-    note: "marked for sale after next distribution -- see DECISIONS.md"
 
   - symbol: VOO
     tier: 1
@@ -46,8 +37,8 @@ holdings:
     tier: 3                # replacement candidate for MSTY/CONY -- diversified, less NAV decay
     account: roth
 
-  - symbol: RYLD
-    tier: 3                # small-cap covered call -- non-tech diversification vs MSTY/CONY
+  - symbol: SPYI
+    tier: 2                # diversified S&P 500 covered call, Section 1256 tax treatment
     account: roth
 
 # Not currently held -- tracked here so tier placement is decided
@@ -59,8 +50,6 @@ watchlist:
     proposed_tier: 2   # leveraged credit CEF -- Tier 2, not Tier 1, see DECISIONS.md
   - symbol: FEPI
     proposed_tier: 2
-  - symbol: SPYI
-    proposed_tier: 2   # diversified S&P 500 covered call, Section 1256 tax treatment
   - symbol: STK
     proposed_tier: 2   # tech CEF, 2026 distributions 100% realized cap gains, not ROC
   - symbol: IDVO
@@ -77,6 +66,8 @@ watchlist:
     proposed_tier: 2   # BDC, real earnings coverage, monthly + supplemental div
   - symbol: UTG
     proposed_tier: 1   # utility CEF, lower volatility, Tier 1/2 boundary candidate
+  - symbol: RYLD
+    proposed_tier: 3   # sold from active holdings Aug 2026 -- diversification candidate if revisited
 
 decay_warning_rule:
   roc_pct_threshold: 0.90

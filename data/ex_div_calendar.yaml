@@ -4,20 +4,10 @@
 # reliable option after this weekend.
 
 holdings:
-  - symbol: O
-    account: taxable
-    frequency: monthly
-    next_ex_date: "2026-08-31"   # UPDATE as confirmed
-
   - symbol: THW
     account: taxable
     frequency: monthly
     next_ex_date: "2026-08-22"   # UPDATE as confirmed
-
-  - symbol: YMAX
-    account: taxable
-    frequency: weekly
-    next_ex_date: "2026-08-19"   # UPDATE weekly
 
   - symbol: VOO
     account: roth
@@ -44,7 +34,7 @@ holdings:
     frequency: monthly
     next_ex_date: "2026-09-24"   # UPDATE as confirmed
 
-  - symbol: RYLD
+  - symbol: SPYI
     account: roth
     frequency: monthly
-    next_ex_date: "2026-09-24"   # UPDATE as confirmed -- verify actual date, assumed same cycle as XYLD
+    next_ex_date: "2026-09-24"   # UPDATE as confirmed
