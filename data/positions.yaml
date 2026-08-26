@@ -3,10 +3,6 @@
 # and pulls live prices from yfinance to compute current values.
 
 positions:
-  - symbol: THW
-    account: taxable
-    shares: 3.57687
-
   - symbol: XYLD
     account: roth
     shares: 6.400960

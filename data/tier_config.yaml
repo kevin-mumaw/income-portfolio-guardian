@@ -13,10 +13,6 @@ targets:
   tier_3: 0.1875 # max instant monthly cash flow / highest decay risk
 
 holdings:
-  - symbol: THW
-    tier: 2                # equity CEF, managed distribution -- not capital preservation
-    account: taxable
-
   - symbol: VOO
     tier: 1
     account: roth

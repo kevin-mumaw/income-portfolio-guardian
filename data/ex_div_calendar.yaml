@@ -4,11 +4,6 @@
 # reliable option after this weekend.
 
 holdings:
-  - symbol: THW
-    account: taxable
-    frequency: monthly
-    next_ex_date: "2026-08-22"   # UPDATE as confirmed
-
   - symbol: VOO
     account: roth
     frequency: quarterly
