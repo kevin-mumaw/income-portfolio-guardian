@@ -12,17 +12,17 @@ holdings:
   - symbol: YMAX
     account: roth
     frequency: weekly
-    next_ex_date: "2026-08-19"   # UPDATE weekly
+    next_ex_date: "2026-08-26"   # ex-div every Wednesday, pay every Thursday -- add 7 days each week
 
   - symbol: MSTY
     account: roth
     frequency: weekly
-    next_ex_date: "2026-08-19"   # UPDATE weekly
+    next_ex_date: "2026-08-27"   # ex-div every Thursday, pay every Friday -- add 7 days each week
 
   - symbol: CONY
     account: roth
     frequency: weekly
-    next_ex_date: "2026-08-19"   # UPDATE weekly
+    next_ex_date: "2026-08-27"   # ex-div every Thursday, pay every Friday -- add 7 days each week
 
   - symbol: XYLD
     account: roth
