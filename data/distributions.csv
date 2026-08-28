@@ -1,0 +1,21 @@
+symbol,ex_date,distribution_per_share,nav_per_share,market_price,roc_pct,source_url,notes
+YMAX,2026-08-19,0.0599,,,,,roth payout
+CONY,2026-08-20,0.2246,,,,,paid 2026-08-21
+MSTY,2026-08-20,0.162,,,,,paid 2026-08-21
+XYLD,2026-08-27,0.3109,,,,,paid 2026-08-27
+SPYI,2026-01-21,0.5309,,,,,
+SPYI,2026-02-18,0.5219,,,,,
+SPYI,2026-03-18,0.5104,,,,,
+SPYI,2026-04-22,0.5247,,,,,
+SPYI,2026-05-20,0.5353,,,,,
+SPYI,2026-06-16,0.5310,,,,,
+SPYI,2026-07-22,0.5300,,,,,
+SPYI,2026-08-19,0.5423,,,,,
+VOO,2025-03-27,1.8121,,,,,
+VOO,2025-06-30,1.7447,,,,,
+VOO,2025-09-29,1.74,,,,,
+VOO,2025-12-22,1.771,,,,,
+VOO,2026-03-27,1.8724,,,,,
+VOO,2026-06-26,1.9622,,,,,
+RYLD,2026-08-27,0.1653,,,,,received while held -- position since sold
+THW,2026-08-31,0.1167,,,,,received while held -- position since sold
