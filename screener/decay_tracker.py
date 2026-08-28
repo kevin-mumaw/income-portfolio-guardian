@@ -56,7 +56,8 @@ def analyze_symbol(df_symbol: pd.DataFrame) -> dict:
     if n == 0:
         return result
 
-    result["latest_roc_pct"] = df_symbol["roc_pct"].iloc[-1]
+    latest_roc = df_symbol["roc_pct"].iloc[-1]
+    result["latest_roc_pct"] = None if pd.isna(latest_roc) else latest_roc
 
     has_price = df_symbol["market_price"].notna().sum() >= 2
     if has_price:
