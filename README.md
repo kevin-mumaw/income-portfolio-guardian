@@ -30,9 +30,13 @@ Three tiers, target allocation of **new capital**:
 
 | Tier | Target % of new capital | Purpose | Example holdings |
 |---|---|---|---|
-| 1 | 37.5% | Capital preservation / long-horizon compounding | VOO |
-| 2 | 43.75% | Diversified weekly/monthly option-premium income | YMAX, XYLD, SPYI |
-| 3 | 18.75% | Maximum instant cash flow (highest decay risk) | MSTY, CONY |
+| 1 | 25% | Stability anchor | VOO |
+| 2 | 65% | Primary growth/income engine -- diversified option-premium income with real total-return track record | YMAX, XYLD, SPYI |
+| 3 | 10% | Existing high-yield holdings continue harvesting; new capital deliberately minimized here | MSTY, CONY |
+
+Targets shifted 2026-09-01 from 37.5/43.75/18.75 to 25/65/10, reflecting a
+3-4 year no-current-income-need horizon where maximizing eventual income
+outweighs near-term stability. See `DECISIONS.md`.
 
 Tier 1 was intentionally set below the traditional half-of-new-capital
 weighting -- it's expected to grow on its own over time as Tier 1 holdings

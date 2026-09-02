@@ -135,3 +135,44 @@ consistency, not because taxable/Roth logic still branches meaningfully
 anywhere except `purchase_timing.py`'s tax-treatment guidance).
 
 ---
+## 2026-09-01 -- Shifted tier targets from 37.5/43.75/18.75 to 25/65/10
+
+**Context:** clarified that the actual goal is a 3-4 year horizon with no
+current need for income -- the portfolio is being built for a future
+payout, not to cover expenses now. That changes the optimization target:
+stability matters less than maximizing eventual income size when there's
+no near-term withdrawal need.
+
+**Reasoning against the old weighting:** VOO's real yield (~1.1%) means
+every dollar routed there earns roughly 1/10th what SPYI earns, while
+also diluting the portfolio's blended yield as VOO grows to a larger
+share of the total. At 37.5% of new capital, VOO was doing more dilution
+than the stability benefit justified for this specific goal.
+
+**Decision:** new capital target shifted to 25% Tier 1 / 65% Tier 2 / 10%
+Tier 3.
+- Tier 1 (VOO) reduced but not eliminated -- still functions as a
+  diversifier against option-selling-strategy correlation risk (SPYI,
+  XYLD, YMAX, MSTY, CONY all depend on volatility/premium income in
+  different ways; VOO's pure equity beta doesn't share that risk driver).
+- Tier 2 increased to become the primary engine -- SPYI specifically
+  combines high real yield with an actual total-return track record
+  (~15%/yr average since inception), unlike Tier 3.
+- Tier 3 reduced to 10%, not zero. Existing MSTY/CONY shares keep
+  harvesting their (volatile, partially-ROC) cash flow -- that's not
+  being abandoned. New capital is just no longer aimed at growing those
+  positions further, since their structural NAV decay means new shares
+  there don't compound the way new shares in Tier 2 do.
+
+**Illustrative math behind the decision** (not a forecast -- for
+reasoning only): modeling ~$8,600/yr new IRA contributions plus an 8%
+growth assumption over 3 years, the 25/65/10 tilt produced roughly $100
+more in projected monthly income by year 3 than holding the prior
+37.5/43.75/18.75 split, using the portfolio's actual verified blended
+yield (15.33% at time of decision) as the baseline.
+
+**What would make this decision wrong in hindsight:** if the near-term
+need for income changes (job loss, unexpected expense), Tier 1's reduced
+weighting means less of a stable, low-volatility base to draw from. This
+tradeoff was made knowingly given the stated "don't need it for 3-4
+years" horizon -- revisit the targets if that horizon changes.
