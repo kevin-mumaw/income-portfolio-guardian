@@ -19,6 +19,7 @@ Usage:
     python screener/watchlist_monitor.py
 """
 
+import math
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -51,6 +52,13 @@ def get_quote_info(symbol: str) -> dict:
         return {"price": None, "yield_pct": None}
 
     price = float(hist["Close"].iloc[-1])
+    if math.isnan(price):
+        # yfinance returned rows but the most recent close itself is
+        # missing (data gap) -- try the prior day instead of failing outright
+        valid_closes = hist["Close"].dropna()
+        if valid_closes.empty:
+            return {"price": None, "yield_pct": None}
+        price = float(valid_closes.iloc[-1])
 
     yield_pct = None
     try:
