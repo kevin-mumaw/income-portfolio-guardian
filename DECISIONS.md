@@ -200,3 +200,30 @@ as a parameter and, when `--new-capital` is used, breaks each tier's
 dollar allocation down by individual fund using sub_weight -- so the
 script's output is a complete, ready-to-execute purchase plan instead of
 requiring a manual per-fund split calculated by hand each time.
+
+## 2026-09-01 -- Corrected mischaracterization: SPYI's ROC% is high too, not "real income"
+
+**What was said earlier (wrong):** SPYI was characterized as having
+"mostly real income, not ROC-driven" in contrast to MSTY/CONY.
+
+**What's actually true, per NEOS's own published 19a-1 notices:**
+SPYI's return-of-capital % has run consistently high -- 91% (Sept 2022),
+94% (June 2024), 96% (Feb 2025), 99% (Oct 2025). That's close to
+MSTY/CONY's ROC%, not meaningfully lower as previously implied.
+
+**The corrected distinction that actually matters:** high ROC% alone
+isn't the danger signal -- it's high ROC% *combined with a declining
+price*, which is exactly what the decay_tracker.py rule already checks
+for (both conditions required, not just one). SPYI's price has stayed
+stable-to-growing (~$53-54 range) despite the high ROC classification;
+MSTY's price has genuinely collapsed alongside its high ROC%. NEOS's own
+literature argues high ROC classification is often a Section 1256
+tax-efficiency artifact for index-option strategies, not necessarily a
+sign of fund depletion -- plausible given the stable price, but not
+something to take purely on the sponsor's word either.
+
+**Practical fix:** `data\distributions.csv` needs the market_price
+column filled in going forward, not just distribution_per_share --
+without it, decay_tracker.py can never actually evaluate SPYI (or any
+holding) against the real rule, regardless of how many periods get
+logged. OPERATING_MANUAL.md updated to make this explicit.

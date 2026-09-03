@@ -74,10 +74,17 @@ so the calendar file goes stale fast if not updated.
 1. Update `next_ex_date` in `data\ex_div_calendar.yaml` for XYLD and
    SPYI once their sponsor announces the next date. SPYI's cycle runs
    ex-date ~18th-22nd of each month; XYLD's has landed similarly.
-2. Record ex-date, distribution amount, and (once the sponsor's 19a-1
-   notice posts, usually a few days later) return-of-capital % into
-   `data\distributions.csv`, following the format in
-   `data\distributions_template.csv`. Once 3+ periods are logged for a
+2. Record ex-date, distribution amount, **the fund's market price that
+   day**, and (once the sponsor's 19a-1 notice posts, usually a few
+   days later) return-of-capital % into `data\distributions.csv`,
+   following the format in `data\distributions_template.csv`. The price
+   column matters as much as the ROC% -- `decay_tracker.py`'s warning
+   rule needs BOTH a high ROC% streak AND a declining price to fire; a
+   fund can run high ROC% for legitimate tax-structure reasons (SPYI's
+   NEOS-published notices have run 91-99% ROC historically) while still
+   being healthy, as long as price holds up. Skipping the price column
+   means the decay check can never actually run for that holding, no
+   matter how many periods get logged. Once 3+ periods are logged for a
    holding, run `python screener\decay_tracker.py` to check it against
    the decay-warning rule.
 
