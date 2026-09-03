@@ -176,3 +176,27 @@ need for income changes (job loss, unexpected expense), Tier 1's reduced
 weighting means less of a stable, low-volatility base to draw from. This
 tradeoff was made knowingly given the stated "don't need it for 3-4
 years" horizon -- revisit the targets if that horizon changes.
+## 2026-09-01 -- Fixed XYLD's tier tag, formalized sub_weight per fund
+
+**Bug found:** XYLD was tagged `tier: 3` in tier_config.yaml -- leftover
+from its original proposal as a MSTY/CONY replacement candidate. Every
+actual use since (the spreadsheet, purchase decisions, this conversation)
+treated it as Tier 2. This silently skewed tier_drift.py's Tier 2/3 math
+for as long as it went unnoticed. Corrected to `tier: 2`.
+
+**New feature: sub_weight field.** Each holding now carries a `sub_weight`
+-- its share of new capital *within* its own tier. Values:
+- Tier 2: SPYI 0.55, XYLD 0.25, YMAX 0.20 (SPYI weighted highest for its
+  real total-return track record vs. YMAX/XYLD's income-only profile)
+- Tier 3: MSTY 0.50, CONY 0.50 (even split, no stated reason to favor one)
+- Tier 1: VOO 1.00 (only holding)
+
+Sub-weights must sum to 1.0 within each tier -- verified at write time,
+not currently enforced by the script (worth adding a validation check if
+more funds get added to a tier later).
+
+**tier_drift.py updated:** `recommend_next_dollar()` now takes `config`
+as a parameter and, when `--new-capital` is used, breaks each tier's
+dollar allocation down by individual fund using sub_weight -- so the
+script's output is a complete, ready-to-execute purchase plan instead of
+requiring a manual per-fund split calculated by hand each time.

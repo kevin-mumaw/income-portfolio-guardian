@@ -21,26 +21,34 @@ holdings:
   - symbol: VOO
     tier: 1
     account: roth
+    sub_weight: 1.00  # only Tier 1 holding
 
   - symbol: YMAX
     tier: 2
     account: roth
+    sub_weight: 0.20  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 
   - symbol: MSTY
     tier: 3
     account: roth
+    sub_weight: 0.50  # per-tier share of new Tier 3 capital
 
   - symbol: CONY
     tier: 3
     account: roth
+    sub_weight: 0.50  # per-tier share of new Tier 3 capital
 
   - symbol: XYLD
-    tier: 3                # replacement candidate for MSTY/CONY -- diversified, less NAV decay
+    tier: 2                # diversified S&P 500 covered call -- corrected from Tier 3
+                            # (leftover from early proposal stage; actual usage has
+                            # treated it as Tier 2 throughout, matching the spreadsheet)
     account: roth
+    sub_weight: 0.25  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 
   - symbol: SPYI
     tier: 2                # diversified S&P 500 covered call, Section 1256 tax treatment
     account: roth
+    sub_weight: 0.55  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 
 # Not currently held -- tracked here so tier placement is decided
 # in advance, before capital moves (see rollover_calc.py, planned).

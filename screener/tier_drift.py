@@ -103,7 +103,7 @@ def compute_drift(positions: pd.DataFrame, config: dict) -> pd.DataFrame:
     return summary
 
 
-def recommend_next_dollar(summary: pd.DataFrame, new_capital):
+def recommend_next_dollar(summary: pd.DataFrame, new_capital, config: dict):
     most_underweight = summary.loc[summary["drift_pct_pts"].idxmin()]
     tier = int(most_underweight["tier"])
     gap_pts = -most_underweight["drift_pct_pts"] * 100
@@ -132,6 +132,24 @@ def recommend_next_dollar(summary: pd.DataFrame, new_capital):
         for t in [1, 2, 3]:
             msg += "\n  Tier " + str(t) + ": $" + "{:,.2f}".format(allocations[t])
 
+        # Break each tier's dollars down by fund using sub_weight
+        sub_weights = {}
+        for h in config["holdings"]:
+            t = h["tier"]
+            sw = h.get("sub_weight")
+            if sw is None:
+                continue
+            sub_weights.setdefault(t, []).append((h["symbol"], sw))
+
+        msg += "\n\nPer-fund breakdown (using sub_weight in tier_config.yaml):"
+        for t in [1, 2, 3]:
+            tier_dollars = allocations.get(t, 0.0)
+            if tier_dollars <= 0 or t not in sub_weights:
+                continue
+            for symbol, sw in sub_weights[t]:
+                fund_dollars = tier_dollars * sw
+                msg += "\n  " + symbol + " (Tier " + str(t) + "): $" + "{:,.2f}".format(fund_dollars)
+
     return msg
 
 
@@ -156,7 +174,7 @@ def main():
 
     print(summary.to_string(index=False))
     print()
-    print(recommend_next_dollar(summary, args.new_capital))
+    print(recommend_next_dollar(summary, args.new_capital, config))
 
 
 if __name__ == "__main__":
