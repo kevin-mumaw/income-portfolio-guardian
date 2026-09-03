@@ -5,23 +5,23 @@
 positions:
   - symbol: XYLD
     account: roth
-    shares: 6.400960
+    shares: 7.707552
 
   - symbol: SPYI
     account: roth
-    shares: 22.457299
+    shares: 23.702652
 
   - symbol: VOO
     account: roth
-    shares: 1.420564
+    shares: 1.456124
 
   - symbol: YMAX
     account: roth
-    shares: 45.823670
+    shares: 53.089934
 
   - symbol: MSTY
     account: roth
-    shares: 8.425026
+    shares: 11.906920
 
   - symbol: CONY
     account: roth
