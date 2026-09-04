@@ -79,6 +79,10 @@ watchlist:
     proposed_tier: 3   # sold from active holdings Aug 2026 -- diversification candidate if revisited
   - symbol: GPTY
     proposed_tier: 3   # AI/tech, call-spread (not full covered call) keeps upside -- +35.46% 1yr total return, 51.29% ROC (much healthier than MSTY/CONY's 96-99%)
+  - symbol: NVDY
+    proposed_tier: 3   # single-stock NVDA covered call -- 94% ROC like MSTY/CONY, but +30.83% 1yr / +58.76%/yr since inception (positive, unlike MSTR/COIN's collapse) -- evidence high ROC isn't disqualifying alone, weak underlying is the real issue
+  - symbol: AIPI
+    proposed_tier: 2   # diversified AI-stock covered calls -- +20.01% 1yr total return, ~33-35% yield, less concentrated single-name risk than GPTY/NVDY
 
 decay_warning_rule:
   roc_pct_threshold: 0.90
