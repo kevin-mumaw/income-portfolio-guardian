@@ -94,6 +94,13 @@ source -- logged manually into `data/distributions.csv` (see
 `data/distributions_template.csv` for the format) from sponsor 19a-1
 notices as they're announced.
 
+**Reference source worth knowing about:** dividendstacker.com tracks
+real total return (not just headline yield) across YieldMax, NEOS,
+Roundhill, and Defiance income funds, with calculators for exactly the
+"what would this actually be worth today, with and without reinvestment"
+question this project keeps asking manually. Useful for cross-checking
+ROC%/total-return figures logged in `distributions.csv`.
+
 ## Running it
 
 ```
