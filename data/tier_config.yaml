@@ -77,6 +77,8 @@ watchlist:
     proposed_tier: 1   # utility CEF, lower volatility, Tier 1/2 boundary candidate
   - symbol: RYLD
     proposed_tier: 3   # sold from active holdings Aug 2026 -- diversification candidate if revisited
+  - symbol: GPTY
+    proposed_tier: 3   # AI/tech, call-spread (not full covered call) keeps upside -- +35.46% 1yr total return, 51.29% ROC (much healthier than MSTY/CONY's 96-99%)
 
 decay_warning_rule:
   roc_pct_threshold: 0.90
