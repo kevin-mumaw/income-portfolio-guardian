@@ -28,15 +28,10 @@ holdings:
     account: roth
     sub_weight: 0.20  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 
-  - symbol: MSTY
-    tier: 3
-    account: roth
-    sub_weight: 0.50  # per-tier share of new Tier 3 capital
-
   - symbol: CONY
     tier: 3
     account: roth
-    sub_weight: 0.50  # per-tier share of new Tier 3 capital
+    sub_weight: 1.00  # only Tier 3 holding remaining after MSTY sold Sept 2026 -- see DECISIONS.md
 
   - symbol: XYLD
     tier: 2                # diversified S&P 500 covered call -- corrected from Tier 3

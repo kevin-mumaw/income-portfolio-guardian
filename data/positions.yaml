@@ -9,7 +9,7 @@ positions:
 
   - symbol: SPYI
     account: roth
-    shares: 167.859037
+    shares: 170.500879
 
   - symbol: VOO
     account: roth
@@ -18,10 +18,6 @@ positions:
   - symbol: YMAX
     account: roth
     shares: 399.268901
-
-  - symbol: MSTY
-    account: roth
-    shares: 76.947570
 
   - symbol: CONY
     account: roth
