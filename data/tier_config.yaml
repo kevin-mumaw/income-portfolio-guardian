@@ -28,10 +28,10 @@ holdings:
     account: roth
     sub_weight: 0.20  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 
-  - symbol: CONY
+  - symbol: AMDY
     tier: 3
     account: roth
-    sub_weight: 1.00  # only Tier 3 holding remaining after MSTY sold Sept 2026 -- see DECISIONS.md
+    sub_weight: 1.00  # only Tier 3 holding after MSTY (Sept) and CONY (Sept) both sold -- see DECISIONS.md
 
   - symbol: XYLD
     tier: 2                # diversified S&P 500 covered call -- corrected from Tier 3
@@ -78,6 +78,12 @@ watchlist:
     proposed_tier: 3   # single-stock NVDA covered call -- 94% ROC like MSTY/CONY, but +30.83% 1yr / +58.76%/yr since inception (positive, unlike MSTR/COIN's collapse) -- evidence high ROC isn't disqualifying alone, weak underlying is the real issue
   - symbol: AIPI
     proposed_tier: 2   # diversified AI-stock covered calls -- +20.01% 1yr total return, ~33-35% yield, less concentrated single-name risk than GPTY/NVDY
+  - symbol: SCHD
+    proposed_tier: 1   # VOO alternative -- quality/dividend-growth screen, ~3% yield, 13.65%/yr since 2011 inception, not an income-tier fit
+  - symbol: CGDV
+    proposed_tier: 1   # VOO alternative -- actively managed quality tilt, ~1.2% yield, ~19%/yr since 2022 inception, newer track record than SCHD
+  - symbol: FDVV
+    proposed_tier: 1   # VOO alternative -- passive quality dividend-growth index, ~2.8-3.3% yield, 18.1%/1yr and 19.5%/3yr total return, 0.15% expense ratio
 
 decay_warning_rule:
   roc_pct_threshold: 0.90
