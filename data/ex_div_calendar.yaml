@@ -1,30 +1,31 @@
 # Manually-maintained ex-dividend calendar. Update dates as sponsors
 # announce them (weekly for YieldMax funds, monthly/quarterly for others).
 # No live API -- same lesson as positions.yaml, manual entry is the
-# reliable option after this weekend.
+# reliable option. Cross-checked against dividendstacker.com,
+# marketchameleon.com, and stockanalysis.com as of 2026-09-04.
 
 holdings:
   - symbol: VOO
     account: roth
     frequency: quarterly
-    next_ex_date: "2026-09-28"
+    next_ex_date: "2026-09-28"   # confirmed via Vanguard's own schedule
 
   - symbol: YMAX
     account: roth
     frequency: weekly
-    next_ex_date: "2026-08-26"   # ex-div every Wednesday, pay every Thursday -- add 7 days each week
+    next_ex_date: "2026-09-09"   # confirmed via marketchameleon.com -- ex-div every Wednesday, pay every Thursday -- add 7 days each week
 
-  - symbol: CONY
+  - symbol: AMDY
     account: roth
     frequency: weekly
-    next_ex_date: "2026-08-27"   # ex-div every Thursday, pay every Friday -- add 7 days each week
+    next_ex_date: "2026-09-10"   # confirmed via marketchameleon.com -- ex-div every Thursday, pay every Friday -- add 7 days each week
 
   - symbol: XYLD
     account: roth
     frequency: monthly
-    next_ex_date: "2026-08-27"   # confirmed real date from Robinhood, replaces earlier guess
+    next_ex_date: "2026-09-21"   # confirmed via dividendmax.com/dividend.com -- ex-date runs ~18th-24th each month
 
   - symbol: SPYI
     account: roth
     frequency: monthly
-    next_ex_date: "2026-09-24"   # UPDATE as confirmed
+    next_ex_date: "2026-09-16"   # confirmed via dividend.com calendar table -- ex-date runs ~15th-22nd each month
