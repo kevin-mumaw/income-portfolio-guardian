@@ -20,12 +20,21 @@ import argparse
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DISTRIBUTIONS_PATH = REPO_ROOT / "data" / "distributions.csv"
+POSITIONS_PATH = REPO_ROOT / "data" / "positions.yaml"
 
 ROC_THRESHOLD = 0.90
 CONSECUTIVE_PERIODS = 3
+
+
+def load_current_holdings() -> set:
+    """Returns the set of symbols currently held, per positions.yaml."""
+    with open(POSITIONS_PATH, "r") as f:
+        data = yaml.safe_load(f)
+    return {p["symbol"] for p in data["positions"] if p.get("shares", 0) > 0}
 
 
 def load_distributions() -> pd.DataFrame:
@@ -100,6 +109,7 @@ def analyze_symbol(df_symbol: pd.DataFrame) -> dict:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--symbol", default=None, help="Check a single symbol instead of all logged funds.")
+    parser.add_argument("--all", action="store_true", help="Include closed/historical positions, not just current holdings.")
     args = parser.parse_args()
 
     df = load_distributions()
@@ -107,8 +117,18 @@ def main():
         return
 
     symbols = df["symbol"].unique()
+
+    if not args.all and not args.symbol:
+        current_holdings = load_current_holdings()
+        symbols = [s for s in symbols if s in current_holdings]
+        closed_symbols = [s for s in df["symbol"].unique() if s not in current_holdings]
+        if closed_symbols:
+            print("(Skipping closed positions not currently held: " + ", ".join(sorted(closed_symbols)) +
+                  " -- use --all to include them)")
+            print()
+
     if args.symbol:
-        symbols = [s for s in symbols if s.upper() == args.symbol.upper()]
+        symbols = [s for s in df["symbol"].unique() if s.upper() == args.symbol.upper()]
         if not symbols:
             print("Symbol not found in data/distributions.csv")
             return
