@@ -43,6 +43,13 @@ holdings:
     account: roth
     sub_weight: 0.55  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 
+  - symbol: QQQI
+    tier: 2                # Traditional IRA -- new account, Roth contributions blocked by MFS filing status
+    account: traditional   # NOTE: deliberately no sub_weight -- only Traditional holding so far,
+                            # would double-count Tier 2's sub_weight sum (already 1.00 from Roth
+                            # holdings) if given one. Counted correctly in drift %, excluded from
+                            # automatic --new-capital fund-level split until more holdings exist here.
+
 # Not currently held -- tracked here so tier placement is decided
 # in advance, before capital moves (see rollover_calc.py, planned).
 watchlist:

@@ -3,6 +3,7 @@
 # and pulls live prices from yfinance to compute current values.
 
 positions:
+  # Roth IRA
   - symbol: SPYI
     account: roth
     shares: 178.694700
@@ -22,3 +23,8 @@ positions:
   - symbol: QQQI
     account: roth
     shares: 2.748511
+
+  # Traditional IRA -- new as of Sept 2026, Roth contributions blocked by MFS filing status
+  - symbol: QQQI
+    account: traditional
+    shares: 1.832340

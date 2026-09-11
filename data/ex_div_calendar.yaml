@@ -25,6 +25,11 @@ holdings:
     frequency: monthly
     next_ex_date: "2026-09-16"   # NEOS Nasdaq-100 fund, same family as SPYI -- CONFIRM exact date, estimated from SPYI's cycle
 
+  - symbol: QQQI
+    account: traditional
+    frequency: monthly
+    next_ex_date: "2026-09-16"   # same fund as Roth QQQI entry, ex-date is identical regardless of account
+
   - symbol: SPYI
     account: roth
     frequency: monthly
