@@ -33,10 +33,8 @@ holdings:
     account: roth
     sub_weight: 1.00  # only Tier 3 holding after MSTY (Sept) and CONY (Sept) both sold -- see DECISIONS.md
 
-  - symbol: XYLD
-    tier: 2                # diversified S&P 500 covered call -- corrected from Tier 3
-                            # (leftover from early proposal stage; actual usage has
-                            # treated it as Tier 2 throughout, matching the spreadsheet)
+  - symbol: QQQI
+    tier: 2                # Nasdaq-100 partial covered call (NEOS) -- replaced XYLD Sept 2026
     account: roth
     sub_weight: 0.25  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 

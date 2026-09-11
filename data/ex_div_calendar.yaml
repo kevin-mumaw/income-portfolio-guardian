@@ -20,10 +20,10 @@ holdings:
     frequency: weekly
     next_ex_date: "2026-09-10"   # confirmed via marketchameleon.com -- ex-div every Thursday, pay every Friday -- add 7 days each week
 
-  - symbol: XYLD
+  - symbol: QQQI
     account: roth
     frequency: monthly
-    next_ex_date: "2026-09-21"   # confirmed via dividendmax.com/dividend.com -- ex-date runs ~18th-24th each month
+    next_ex_date: "2026-09-16"   # NEOS Nasdaq-100 fund, same family as SPYI -- CONFIRM exact date, estimated from SPYI's cycle
 
   - symbol: SPYI
     account: roth

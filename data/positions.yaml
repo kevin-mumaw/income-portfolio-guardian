@@ -3,10 +3,6 @@
 # and pulls live prices from yfinance to compute current values.
 
 positions:
-  - symbol: XYLD
-    account: roth
-    shares: 87.110824
-
   - symbol: SPYI
     account: roth
     shares: 178.694700
@@ -17,8 +13,12 @@ positions:
 
   - symbol: YMAX
     account: roth
-    shares: 477.597882
+    shares: 504.140682
 
   - symbol: AMDY
     account: roth
     shares: 21.776198
+
+  - symbol: QQQI
+    account: roth
+    shares: 2.748511
