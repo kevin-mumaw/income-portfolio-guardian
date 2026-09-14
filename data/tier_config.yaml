@@ -31,7 +31,16 @@ holdings:
   - symbol: AMDY
     tier: 3
     account: roth
-    sub_weight: 1.00  # only Tier 3 holding after MSTY (Sept) and CONY (Sept) both sold -- see DECISIONS.md
+    sub_weight: 0.75  # per-tier share of new Tier 3 capital -- larger position, established first -- see DECISIONS.md
+
+  - symbol: MRNY
+    tier: 3                # single-stock YieldMax synthetic covered call on Moderna (MRNA) -- same
+                            # family as AMDY. Sept 2026: most recent distribution 0% ROC/100% real
+                            # income, healthiest reading of any single-stock fund researched -- but
+                            # +308.65% 1yr total return vs only +7.57%/yr since inception shows a
+                            # rough multi-year stretch before this recent spike
+    account: roth
+    sub_weight: 0.25  # per-tier share of new Tier 3 capital -- small starter position per Kevin's own framing
 
   - symbol: QQQI
     tier: 2                # Nasdaq-100 partial covered call (NEOS) -- replaced XYLD Sept 2026

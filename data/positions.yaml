@@ -10,19 +10,23 @@ positions:
 
   - symbol: VOO
     account: roth
-    shares: 8.253835
+    shares: 8.504017
 
   - symbol: YMAX
     account: roth
-    shares: 504.140682
+    shares: 624.703307
 
   - symbol: AMDY
     account: roth
-    shares: 21.776198
+    shares: 63.207893
 
   - symbol: QQQI
     account: roth
-    shares: 2.748511
+    shares: 15.618523
+
+  - symbol: MRNY
+    account: roth
+    shares: 1.825928
 
   # Traditional IRA -- new as of Sept 2026, Roth contributions blocked by MFS filing status
   - symbol: QQQI

@@ -18,7 +18,12 @@ holdings:
   - symbol: AMDY
     account: roth
     frequency: weekly
-    next_ex_date: "2026-09-10"   # confirmed via marketchameleon.com -- ex-div every Thursday, pay every Friday -- add 7 days each week
+    next_ex_date: "2026-09-17"   # Group 2 (Wed declare/Thu ex/Fri pay) -- confirmed via dripcalc.com -- add 7 days each week
+
+  - symbol: MRNY
+    account: roth
+    frequency: weekly
+    next_ex_date: "2026-09-17"   # Group 2 (Wed declare/Thu ex/Fri pay), same group as AMDY -- confirmed via dripcalc.com -- add 7 days each week
 
   - symbol: QQQI
     account: roth
