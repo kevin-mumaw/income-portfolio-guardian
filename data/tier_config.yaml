@@ -31,7 +31,7 @@ holdings:
   - symbol: AMDY
     tier: 3
     account: roth
-    sub_weight: 0.75  # per-tier share of new Tier 3 capital -- larger position, established first -- see DECISIONS.md
+    sub_weight: 0.50  # per-tier share of new Tier 3 capital -- rebalanced Sept 2026 toward a deliberate 50/50 split with MRNY -- see DECISIONS.md
 
   - symbol: MRNY
     tier: 3                # single-stock YieldMax synthetic covered call on Moderna (MRNA) -- same
@@ -40,7 +40,7 @@ holdings:
                             # +308.65% 1yr total return vs only +7.57%/yr since inception shows a
                             # rough multi-year stretch before this recent spike
     account: roth
-    sub_weight: 0.25  # per-tier share of new Tier 3 capital -- small starter position per Kevin's own framing
+    sub_weight: 0.50  # per-tier share of new Tier 3 capital -- rebalanced Sept 2026, no longer just a starter position, targeting 50/50 with AMDY
 
   - symbol: QQQI
     tier: 2                # Nasdaq-100 partial covered call (NEOS) -- replaced XYLD Sept 2026
