@@ -16,6 +16,7 @@ Usage:
     python screener/income_tracker.py
 """
 
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -26,6 +27,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 POSITIONS_PATH = REPO_ROOT / "data" / "positions.yaml"
 CALENDAR_PATH = REPO_ROOT / "data" / "ex_div_calendar.yaml"
 DISTRIBUTIONS_PATH = REPO_ROOT / "data" / "distributions.csv"
+CONTRIBUTIONS_PATH = REPO_ROOT / "data" / "contributions.csv"
 
 FREQUENCY_MULTIPLIER = {
     "weekly": 52,
@@ -78,6 +80,34 @@ def get_live_price(symbol: str):
     if hist.empty:
         return None
     return float(hist["Close"].iloc[-1])
+
+
+def load_total_contributed() -> float:
+    if not CONTRIBUTIONS_PATH.exists():
+        return 0.0
+    df = pd.read_csv(CONTRIBUTIONS_PATH)
+    if "amount" not in df.columns or df.empty:
+        return 0.0
+    return float(df["amount"].sum())
+
+
+def load_trailing_30_day_received() -> float:
+    """Sums total_received across all rows in the trailing 30 days, using
+    ex_date as the reference date. Only counts rows where total_received
+    was actually logged -- older rows without it are simply not counted,
+    not treated as zero."""
+    if not DISTRIBUTIONS_PATH.exists():
+        return 0.0
+    df = pd.read_csv(DISTRIBUTIONS_PATH)
+    if "total_received" not in df.columns:
+        return 0.0
+    df = df.dropna(subset=["total_received"])
+    if df.empty:
+        return 0.0
+    df["ex_date"] = pd.to_datetime(df["ex_date"])
+    cutoff = datetime.now() - timedelta(days=30)
+    recent = df[df["ex_date"] >= cutoff]
+    return float(recent["total_received"].sum())
 
 
 def main():
@@ -171,7 +201,21 @@ def main():
         for m in missing_data:
             print("  " + m)
 
+    print()
+    total_contributed = load_total_contributed()
+    trailing_30 = load_trailing_30_day_received()
+    if total_contributed > 0:
+        print("Real, retrospective result (not a projection):")
+        print("  Total contributed to date: $" + "{:,.2f}".format(total_contributed))
+        print("  Actually received in the trailing 30 days: $" + "{:,.2f}".format(trailing_30))
+        print("  \"I turned $" + "{:,.0f}".format(total_contributed) +
+              " into $" + "{:,.0f}".format(trailing_30) + " a month\"")
+        print("  (Only counts distributions with a logged total_received amount --")
+        print("   older rows without it are excluded, not counted as zero.)")
+    else:
+        print("No contributions logged yet -- add entries to data/contributions.csv")
+        print("to see \"$X invested -> $Y/month\" here.")
+
 
 if __name__ == "__main__":
     main()
-    

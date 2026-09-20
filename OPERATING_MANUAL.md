@@ -22,12 +22,20 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
 ---
 
+## As-needed: whenever new cash goes into any account
+
+Add a line to `data\contributions.csv` -- date and dollar amount, one
+row per deposit. This is what `income_tracker.py` divides real received
+income against to compute "$X invested -> $Y/month". Skipping this just
+means that contribution doesn't count toward the total, understating
+the real number.
+
 ## As-needed: after any buy or sell
 
 This is the most common thing you'll do. Whenever you execute a trade in
 Robinhood, update the ledger by hand -- nothing pulls this automatically.
-As of Aug 2026, all holdings are in the Roth; the taxable account was
-wound down (see `DECISIONS.md`).
+As of Sept 2026, holdings span the Roth and Traditional IRA; the taxable
+account was wound down (see `DECISIONS.md`).
 
 1. Open `data\positions.yaml`.
 2. Update the `shares:` value for whatever you bought or sold. If you
@@ -75,18 +83,23 @@ so the calendar file goes stale fast if not updated.
    SPYI once their sponsor announces the next date. SPYI's cycle runs
    ex-date ~18th-22nd of each month; XYLD's has landed similarly.
 2. Record ex-date, distribution amount, **the fund's market price that
-   day**, and (once the sponsor's 19a-1 notice posts, usually a few
-   days later) return-of-capital % into `data\distributions.csv`,
-   following the format in `data\distributions_template.csv`. The price
-   column matters as much as the ROC% -- `decay_tracker.py`'s warning
-   rule needs BOTH a high ROC% streak AND a declining price to fire; a
-   fund can run high ROC% for legitimate tax-structure reasons (SPYI's
-   NEOS-published notices have run 91-99% ROC historically) while still
-   being healthy, as long as price holds up. Skipping the price column
-   means the decay check can never actually run for that holding, no
-   matter how many periods get logged. Once 3+ periods are logged for a
-   holding, run `python screener\decay_tracker.py` to check it against
-   the decay-warning rule.
+   day**, **the actual total dollar amount received** (shares owned at
+   the time × per-share rate -- put it in the `total_received` column,
+   not just the notes), and (once the sponsor's 19a-1 notice posts,
+   usually a few days later) return-of-capital % into
+   `data\distributions.csv`, following the format in
+   `data\distributions_template.csv`. The price column matters as much
+   as the ROC% -- `decay_tracker.py`'s warning rule needs BOTH a high
+   ROC% streak AND a declining price to fire; a fund can run high ROC%
+   for legitimate tax-structure reasons (SPYI's NEOS-published notices
+   have run 91-99% ROC historically) while still being healthy, as long
+   as price holds up. Skipping the price column means the decay check
+   can never actually run for that holding, no matter how many periods
+   get logged. The `total_received` column feeds `income_tracker.py`'s
+   "$X invested -> $Y/month" summary -- skipping it just means that
+   distribution won't count toward the real, lived total. Once 3+
+   periods are logged for a holding, run `python screener\decay_tracker.py`
+   to check it against the decay-warning rule.
 
 ---
 
