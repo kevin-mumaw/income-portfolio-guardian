@@ -1,41 +1,47 @@
-# Manually-maintained ex-dividend calendar. Update dates as sponsors
-# announce them (weekly for YieldMax funds, monthly/quarterly for others).
-# No live API -- same lesson as positions.yaml, manual entry is the
-# reliable option. Cross-checked against dividendstacker.com,
-# marketchameleon.com, and stockanalysis.com as of 2026-09-04.
+# Manually-maintained ex-dividend calendar.
+#
+# WEEKLY funds (YieldMax-style) use ex_weekday instead of a fixed date --
+# purchase_timing.py computes the next actual occurrence automatically,
+# so this never goes stale. Nothing to update week to week.
+#
+# MONTHLY/QUARTERLY funds still use next_ex_date, since their ex-date
+# doesn't follow a fixed day-of-week pattern -- these genuinely need a
+# manual update after each cycle. purchase_timing.py now flags any date
+# that's already in the past instead of silently displaying it as if
+# it were still upcoming.
 
 holdings:
   - symbol: VOO
     account: roth
     frequency: quarterly
-    next_ex_date: "2026-09-28"   # confirmed via Vanguard's own schedule
+    next_ex_date: "2026-09-28"   # confirmed via Vanguard's own schedule -- update manually each quarter
 
   - symbol: YMAX
     account: roth
     frequency: weekly
-    next_ex_date: "2026-09-09"   # confirmed via marketchameleon.com -- ex-div every Wednesday, pay every Thursday -- add 7 days each week
+    ex_weekday: Wednesday   # pay Thursday -- confirmed via marketchameleon.com
 
   - symbol: AMDY
     account: roth
     frequency: weekly
-    next_ex_date: "2026-09-17"   # Group 2 (Wed declare/Thu ex/Fri pay) -- confirmed via dripcalc.com -- add 7 days each week
+    ex_weekday: Thursday    # pay Friday -- Group 2, confirmed via dripcalc.com
 
   - symbol: MRNY
     account: roth
     frequency: weekly
-    next_ex_date: "2026-09-17"   # Group 2 (Wed declare/Thu ex/Fri pay), same group as AMDY -- confirmed via dripcalc.com -- add 7 days each week
+    ex_weekday: Thursday    # pay Friday -- Group 2, same as AMDY, confirmed via dripcalc.com
 
   - symbol: QQQI
     account: roth
     frequency: monthly
-    next_ex_date: "2026-09-16"   # NEOS Nasdaq-100 fund, same family as SPYI -- CONFIRM exact date, estimated from SPYI's cycle
+    next_ex_date: "2026-10-16"   # estimated one month after Sept 16 cycle -- CONFIRM against NEOS's own site
 
   - symbol: QQQI
     account: traditional
     frequency: monthly
-    next_ex_date: "2026-09-16"   # same fund as Roth QQQI entry, ex-date is identical regardless of account
+    next_ex_date: "2026-10-16"   # same fund as Roth QQQI entry -- CONFIRM against NEOS's own site
 
   - symbol: SPYI
     account: roth
     frequency: monthly
-    next_ex_date: "2026-09-16"   # confirmed via dividend.com calendar table -- ex-date runs ~15th-22nd each month
+    next_ex_date: "2026-10-21"   # estimated one month after Sept 16 cycle, per dividend.com's ~18th-22nd pattern -- CONFIRM against NEOS's own site

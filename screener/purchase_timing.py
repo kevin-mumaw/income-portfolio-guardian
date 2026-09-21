@@ -17,7 +17,7 @@ Usage:
 """
 
 import argparse
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 import yaml
@@ -25,20 +25,34 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CALENDAR_PATH = REPO_ROOT / "data" / "ex_div_calendar.yaml"
 
+WEEKDAY_NUM = {
+    "Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3,
+    "Friday": 4, "Saturday": 5, "Sunday": 6,
+}
+
 
 def load_calendar() -> dict:
     with open(CALENDAR_PATH, "r") as f:
         return yaml.safe_load(f)
 
 
-def days_until(date_str: str) -> int:
-    target = datetime.strptime(date_str, "%Y-%m-%d").date()
+def next_weekday_date(weekday_name: str) -> date:
+    """Computes the next occurrence of a given weekday from today
+    (inclusive of today, if today is that weekday). Never goes stale --
+    no stored date to fall out of date."""
+    target_num = WEEKDAY_NUM[weekday_name]
+    today = date.today()
+    days_ahead = (target_num - today.weekday()) % 7
+    return today + timedelta(days=days_ahead)
+
+
+def days_until(target: date) -> int:
     return (target - date.today()).days
 
 
 def guidance_for(account: str, days_out: int) -> str:
-    if account == "roth":
-        return "Timing doesn't meaningfully matter -- buy whenever's convenient."
+    if account in ("roth", "traditional"):
+        return "Timing doesn't meaningfully matter -- buy whenever's convenient (tax-deferred/tax-free account, no immediate tax event from distribution timing)."
 
     # taxable
     if 0 <= days_out <= 5:
@@ -67,8 +81,19 @@ def main():
             return
 
     for h in holdings:
-        days_out = days_until(h["next_ex_date"])
-        print(h["symbol"] + " (" + h["account"] + ") -- next ex-date " + h["next_ex_date"] + " (" + str(days_out) + " days)")
+        if "ex_weekday" in h:
+            target = next_weekday_date(h["ex_weekday"])
+            days_out = days_until(target)
+            print(h["symbol"] + " (" + h["account"] + ") -- next ex-date " + str(target) +
+                  " (" + str(days_out) + " days) [auto-computed from " + h["ex_weekday"] + ", always current]")
+        else:
+            target = datetime.strptime(h["next_ex_date"], "%Y-%m-%d").date()
+            days_out = days_until(target)
+            staleness_flag = ""
+            if days_out < -7:
+                staleness_flag = " *** STALE -- this date is over a week in the past, update it in ex_div_calendar.yaml ***"
+            print(h["symbol"] + " (" + h["account"] + ") -- next ex-date " + h["next_ex_date"] +
+                  " (" + str(days_out) + " days)" + staleness_flag)
         print("  " + guidance_for(h["account"], days_out))
         print()
 
