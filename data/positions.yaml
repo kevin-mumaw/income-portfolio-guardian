@@ -18,15 +18,15 @@ positions:
 
   - symbol: AMDY
     account: roth
-    shares: 42.878324
+    shares: 52.659231
 
   - symbol: QQQI
     account: roth
-    shares: 27.317238
+    shares: 54.305363
 
   - symbol: MRNY
     account: roth
-    shares: 55.085337
+    shares: 67.895995
 
   # Traditional IRA -- new as of Sept 2026, Roth contributions blocked by MFS filing status
   - symbol: QQQI
