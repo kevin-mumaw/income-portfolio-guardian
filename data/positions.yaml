@@ -6,27 +6,27 @@ positions:
   # Roth IRA
   - symbol: SPYI
     account: roth
-    shares: 129.903977
+    shares: 189.113894
 
   - symbol: VOO
     account: roth
-    shares: 5.692467
+    shares: 10.169368
 
   - symbol: YMAX
     account: roth
-    shares: 702.798421
+    shares: 1117.843816
 
   - symbol: AMDY
     account: roth
-    shares: 52.659231
+    shares: 75.568738
 
   - symbol: QQQI
     account: roth
-    shares: 54.305363
+    shares: 124.920598
 
   - symbol: MRNY
     account: roth
-    shares: 67.895995
+    shares: 96.735216
 
   # Traditional IRA -- new as of Sept 2026, Roth contributions blocked by MFS filing status
   - symbol: QQQI
