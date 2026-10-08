@@ -38,8 +38,10 @@ AMDY,2026-09-17,0.3910,,,,,12.98,"matches current post-sale share count (33.2078
 YMAX,2026-09-23,0.0596,,,,,37.23,"received $37.23, matches current full share count (624.703307)"
 AMDY,2026-09-24,0.7790,,,,,25.87,"received $25.87, matches current full share count (33.207893) -- roughly 2x prior cycle rate"
 MRNY,2026-09-24,0.6367,,,,,27.27,"received $27.27, matches current full share count (42.825928)"
-VOO,2026-09-25,1.85,,,,,15.50,received $15.50 at declared $1.85/share (~8.378 eligible shares at ex-date)
+VOO,2026-09-25,1.85,,,,,15.50,"received on 8.504017 shares (pre-sale count) -- DRIP is on for VOO, so this reinvested into more shares rather than paying cash; real current share count still needed from Robinhood to update positions.yaml"
 YMAX,2026-09-30,0.0596,,,,,41.89,"received $41.89, matches current full share count (702.798421)"
-MRNY,2026-10-01,0.7462,,,,,54.81,received $54.81 at declared $0.7462/share (~73.452 eligible shares at ex-date)
-AMDY,2026-10-01,1.03,,,,,51.98,received $51.98 at declared $1.03/share (~50.466 eligible shares at ex-date)
+MRNY,2026-10-01,0.8073,,,,,54.81,"received $54.81, matches current full share count (67.895995)"
+AMDY,2026-10-01,0.9871,,,,,51.98,"received $51.98, matches current full share count (52.659231)"
 YMAX,2026-10-07,0.0603,,,,,67.41,"received $67.41 - matches full share count (1117.843816)"
+AMDY,2026-10-08,1.03,,,,,,"declared rate - pays 10/09 - expected $77.84 on 75.568738 shares"
+MRNY,2026-10-08,0.7462,,,,,,"declared rate - pays 10/09 - expected $72.18 on 96.735216 shares"
