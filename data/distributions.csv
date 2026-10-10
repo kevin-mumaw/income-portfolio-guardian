@@ -43,5 +43,5 @@ YMAX,2026-09-30,0.0596,,,,,41.89,"received $41.89, matches current full share co
 MRNY,2026-10-01,0.8073,,,,,54.81,"received $54.81, matches current full share count (67.895995)"
 AMDY,2026-10-01,0.9871,,,,,51.98,"received $51.98, matches current full share count (52.659231)"
 YMAX,2026-10-07,0.0603,,,,,67.41,"received $67.41 - matches full share count (1117.843816)"
-AMDY,2026-10-08,1.03,,,,,,"declared rate - pays 10/09 - expected $77.84 on 75.568738 shares"
-MRNY,2026-10-08,0.7462,,,,,,"declared rate - pays 10/09 - expected $72.18 on 96.735216 shares"
+AMDY,2026-10-08,1.03,,,,,77.49,received $77.49 on 75.568738 shares (declared 1.03/share)
+MRNY,2026-10-08,0.7462,,,,,72.18,received $72.18 on 96.735216 shares
