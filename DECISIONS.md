@@ -227,3 +227,13 @@ column filled in going forward, not just distribution_per_share --
 without it, decay_tracker.py can never actually evaluate SPYI (or any
 holding) against the real rule, regardless of how many periods get
 logged. OPERATING_MANUAL.md updated to make this explicit.
+
+---
+## 2026-09-25 -- Shifted tier targets from 25/65/10 to 15/65/20
+
+**Decision:** targets are now 15% Tier 1 / 65% Tier 2 / 20% Tier 3. Tier 3
+(AMDY/MRNY, split 50/50) is a deliberate larger sleeve; VOO is reduced to
+a smaller diversifier. Decay rule unchanged (ROC > 90% for 3+ periods AND
+declining price). Logged 2026-10-11 -- the YAML change had not been
+committed before then.
+

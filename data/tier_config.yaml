@@ -8,14 +8,9 @@
 # both taxable and Roth) with different intent/status per position.
 
 targets:
-  tier_1: 0.25   # capital preservation / stability anchor -- lowered from 37.5%; on a
-                 # 3-4yr no-current-income-need horizon, stability matters less than
-                 # maximizing eventual income, so VOO gets a smaller share of new capital
-  tier_2: 0.65   # diversified weekly/monthly option-premium income -- primary growth
-                 # engine for this horizon (real total-return track record, e.g. SPYI)
-  tier_3: 0.10   # max instant cash flow / highest decay risk -- deliberately minimized,
-                 # not zeroed; existing MSTY/CONY shares keep harvesting, but new capital
-                 # is better spent compounding in Tier 2 than adding more decay-prone shares
+  tier_1: 0.15   # VOO -- stability anchor; lowered from 25% on 2026-09-25 (see DECISIONS.md)
+  tier_2: 0.65   # SPYI/QQQI/YMAX -- primary income engine
+  tier_3: 0.20   # AMDY/MRNY -- raised from 10%; deliberate higher-yield sleeve, decay risk monitored
 
 holdings:
   - symbol: VOO
