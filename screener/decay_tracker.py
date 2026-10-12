@@ -7,9 +7,9 @@ where the decay-warning rule from DECISIONS.md has triggered: ROC% above
 90% for 3+ consecutive distribution periods while price is also
 declining over that same window.
 
-This does NOT pull data automatically -- there is no reliable API for
-distribution composition (ROC%). You log each distribution by hand from
-the sponsor's 19a-1 notice as it's announced.
+ROC% is logged by hand (no reliable API) from the sponsor's distribution
+table or 19a-1 notice. Price is pulled automatically from yfinance for the
+same window as the ROC streak; logged market_price is the fallback.
 
 Usage:
     python screener/decay_tracker.py
@@ -50,7 +50,33 @@ def load_distributions() -> pd.DataFrame:
     return df
 
 
-def analyze_symbol(df_symbol: pd.DataFrame) -> dict:
+def fetch_price_change(symbol: str, start, end):
+    """
+    Pulls closing prices from yfinance and returns the % price change from
+    the first trading day on/after `start` to the last trading day on/before
+    `end`. Returns None if the lookup fails (offline, bad symbol, no data),
+    so the caller can fall back to logged market_price values.
+    """
+    try:
+        import yfinance as yf
+
+        hist = yf.Ticker(symbol).history(
+            start=pd.Timestamp(start).strftime("%Y-%m-%d"),
+            end=(pd.Timestamp(end) + pd.Timedelta(days=4)).strftime("%Y-%m-%d"),
+        )
+        closes = hist["Close"].dropna()
+        closes = closes[closes.index.tz_localize(None) <= pd.Timestamp(end)] if len(closes) else closes
+        if len(closes) < 2:
+            return None
+        first, last = float(closes.iloc[0]), float(closes.iloc[-1])
+        if first == 0:
+            return None
+        return (last - first) / first
+    except Exception:
+        return None
+
+
+def analyze_symbol(df_symbol: pd.DataFrame, symbol: str = None) -> dict:
     df_symbol = df_symbol.reset_index(drop=True)
     n = len(df_symbol)
 
@@ -60,6 +86,7 @@ def analyze_symbol(df_symbol: pd.DataFrame) -> dict:
         "warning_reason": None,
         "latest_roc_pct": None,
         "price_trend": None,
+        "avg_roc_last4": None,
     }
 
     if n == 0:
@@ -68,13 +95,24 @@ def analyze_symbol(df_symbol: pd.DataFrame) -> dict:
     latest_roc = df_symbol["roc_pct"].iloc[-1]
     result["latest_roc_pct"] = None if pd.isna(latest_roc) else latest_roc
 
-    has_price = df_symbol["market_price"].notna().sum() >= 2
-    if has_price:
-        first_price = df_symbol["market_price"].dropna().iloc[0]
-        last_price = df_symbol["market_price"].dropna().iloc[-1]
-        if first_price and first_price != 0:
-            pct_change = (last_price - first_price) / first_price
-            result["price_trend"] = pct_change
+    # Price trend over the SAME window as the ROC streak (last N periods).
+    # Prefer live prices from yfinance; fall back to logged market_price.
+    window = df_symbol.iloc[-CONSECUTIVE_PERIODS:] if n >= CONSECUTIVE_PERIODS else df_symbol
+    pct_change = None
+    if symbol:
+        pct_change = fetch_price_change(
+            symbol, window["ex_date"].iloc[0], window["ex_date"].iloc[-1]
+        )
+    if pct_change is None:
+        logged = window["market_price"].dropna()
+        if len(logged) >= 2 and logged.iloc[0]:
+            pct_change = (logged.iloc[-1] - logged.iloc[0]) / logged.iloc[0]
+    has_price = pct_change is not None
+    result["price_trend"] = pct_change
+    result["avg_roc_last4"] = (
+        float(df_symbol["roc_pct"].iloc[-4:].mean())
+        if df_symbol["roc_pct"].iloc[-4:].notna().any() else None
+    )
 
     if n >= CONSECUTIVE_PERIODS:
         recent_roc = df_symbol["roc_pct"].iloc[-CONSECUTIVE_PERIODS:]
@@ -95,8 +133,8 @@ def analyze_symbol(df_symbol: pd.DataFrame) -> dict:
         elif roc_streak and price_declining is None:
             result["warning_reason"] = (
                 "ROC% above " + str(int(ROC_THRESHOLD * 100)) + "% for last " +
-                str(CONSECUTIVE_PERIODS) + " periods, but no price data logged to confirm decline. "
-                "Log market_price in distributions.csv to complete this check."
+                str(CONSECUTIVE_PERIODS) + " periods, but price data could not be fetched to confirm decline. "
+                "Check your internet connection / yfinance, or log market_price in distributions.csv."
             )
         elif roc_streak and price_declining is False:
             result["warning_reason"] = (
@@ -135,13 +173,17 @@ def main():
 
     for symbol in symbols:
         df_symbol = df[df["symbol"] == symbol]
-        result = analyze_symbol(df_symbol)
+        result = analyze_symbol(df_symbol, symbol)
 
         print(symbol + " -- " + str(result["periods_logged"]) + " period(s) logged")
         if result["latest_roc_pct"] is not None:
             print("  Latest ROC%: " + "{:.1%}".format(result["latest_roc_pct"]))
+        if result["avg_roc_last4"] is not None:
+            print("  Average ROC% over last 4 periods: " + "{:.1%}".format(result["avg_roc_last4"]))
         if result["price_trend"] is not None:
-            print("  Price trend over logged window: " + "{:.1%}".format(result["price_trend"]))
+            print("  Price change over last " + str(CONSECUTIVE_PERIODS) + " periods: " + "{:.1%}".format(result["price_trend"]))
+        else:
+            print("  Price change: unavailable (could not fetch prices)")
         if result["periods_logged"] < CONSECUTIVE_PERIODS:
             print("  Not enough periods logged yet to evaluate the decay rule (need " +
                   str(CONSECUTIVE_PERIODS) + "+).")
