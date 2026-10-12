@@ -14,7 +14,7 @@ holdings:
   - symbol: VOO
     account: roth
     frequency: quarterly
-    next_ex_date: "2026-09-28"   # confirmed via Vanguard's own schedule -- update manually each quarter
+    next_ex_date: "2026-12-22"   # ESTIMATE (late Dec; Vanguard announces 1-2 wks ahead) -- confirm at investor.vanguard.com
 
   - symbol: YMAX
     account: roth
@@ -34,14 +34,14 @@ holdings:
   - symbol: QQQI
     account: roth
     frequency: monthly
-    next_ex_date: "2026-10-16"   # estimated one month after Sept 16 cycle -- CONFIRM against NEOS's own site
+    next_ex_date: "2026-10-21"   # confirmed on neosfunds.com/qqqi (pay 10/23); then 11/18, 12/16
 
   - symbol: QQQI
     account: traditional
     frequency: monthly
-    next_ex_date: "2026-10-16"   # same fund as Roth QQQI entry -- CONFIRM against NEOS's own site
+    next_ex_date: "2026-10-21"   # same fund as Roth QQQI entry; confirmed on neosfunds.com/qqqi
 
   - symbol: SPYI
     account: roth
     frequency: monthly
-    next_ex_date: "2026-10-21"   # estimated one month after Sept 16 cycle, per dividend.com's ~18th-22nd pattern -- CONFIRM against NEOS's own site
+    next_ex_date: "2026-10-21"   # confirmed on neosfunds.com/spyi (pay 10/23); then 11/18, 12/16

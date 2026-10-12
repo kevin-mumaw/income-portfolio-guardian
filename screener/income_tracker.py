@@ -56,7 +56,11 @@ def load_frequencies() -> dict:
     return result
 
 
-def load_latest_distributions() -> dict:
+WEEKLY_AVG_PERIODS = 4
+
+
+def load_recent_distributions() -> dict:
+    """symbol -> list of the last WEEKLY_AVG_PERIODS per-share amounts, oldest first."""
     if not DISTRIBUTIONS_PATH.exists():
         return {}
     df = pd.read_csv(DISTRIBUTIONS_PATH)
@@ -69,8 +73,8 @@ def load_latest_distributions() -> dict:
     df = df.sort_values("ex_date")
     result = {}
     for symbol in df["symbol"].unique():
-        latest = df[df["symbol"] == symbol].iloc[-1]
-        result[symbol] = float(latest["distribution_per_share"])
+        vals = df[df["symbol"] == symbol]["distribution_per_share"].astype(float).tolist()
+        result[symbol] = vals[-WEEKLY_AVG_PERIODS:]
     return result
 
 
@@ -113,7 +117,7 @@ def load_trailing_30_day_received() -> float:
 def main():
     positions = load_positions()
     frequencies = load_frequencies()
-    latest_dist = load_latest_distributions()
+    recent_dist = load_recent_distributions()
 
     rows = []
     missing_data = []
@@ -123,7 +127,14 @@ def main():
             continue
 
         freq = frequencies.get((symbol, account))
-        dist_per_share = latest_dist.get(symbol)
+        recent = recent_dist.get(symbol)
+        dist_per_share = None
+        latest_only = None
+        if recent:
+            latest_only = recent[-1]
+            # Weekly option-income funds swing a lot week to week, so project
+            # from the average of the last few payouts, not a single week.
+            dist_per_share = (sum(recent) / len(recent)) if freq == "weekly" else recent[-1]
 
         if freq is None or dist_per_share is None:
             missing_data.append(symbol + " (" + account + ")")
@@ -136,15 +147,17 @@ def main():
 
         per_period_income = shares * dist_per_share
         annual_income = per_period_income * multiplier
+        annual_latest = shares * latest_only * multiplier
 
         rows.append({
             "symbol": symbol,
             "account": account,
             "shares": shares,
             "frequency": freq,
-            "latest_dist_per_share": dist_per_share,
+            "dist_per_share_used": dist_per_share,
             "per_period_income": per_period_income,
             "annual_income": annual_income,
+            "annual_latest_week": annual_latest,
         })
 
     if not rows:
@@ -159,8 +172,9 @@ def main():
 
     df = pd.DataFrame(rows)
 
-    print("Per-holding income (based on most recent logged distribution):")
-    print(df[["symbol", "account", "shares", "frequency", "latest_dist_per_share", "annual_income"]].to_string(index=False))
+    print("Per-holding income (weekly funds: average of last " + str(WEEKLY_AVG_PERIODS) +
+          " payouts; monthly/quarterly: most recent payout):")
+    print(df[["symbol", "account", "shares", "frequency", "dist_per_share_used", "annual_income"]].to_string(index=False))
     print()
 
     total_annual = df["annual_income"].sum()
@@ -168,11 +182,13 @@ def main():
     total_monthly = total_annual / 12
     total_quarterly = total_annual / 4
 
-    print("Portfolio income (annualized from latest known distributions):")
+    print("Portfolio income (annualized from the figures above):")
     print("  Weekly:    $" + "{:,.2f}".format(total_weekly))
     print("  Monthly:   $" + "{:,.2f}".format(total_monthly))
     print("  Quarterly: $" + "{:,.2f}".format(total_quarterly))
     print("  Annual:    $" + "{:,.2f}".format(total_annual))
+    print("  (If projected from only the single latest weekly payout instead: $" +
+          "{:,.2f}".format(df["annual_latest_week"].sum() / 12) + "/month -- more volatile, shown for comparison.)")
     print()
 
     total_value = 0.0

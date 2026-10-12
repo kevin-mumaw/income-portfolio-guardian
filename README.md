@@ -18,33 +18,33 @@ on demand instead of by hand.
 
 ## Account structure
 
-**Taxable holdings are being wound down entirely** -- not for performance
-reasons, but because REIT/CEF distributions (O, THW) are typically taxed
-as ordinary income, one of the least tax-efficient profiles to hold in a
-taxable account. O and taxable YMAX are already closed; THW is next. Once
-complete, this becomes a Roth-only tracker. See `DECISIONS.md`.
+Holdings are in a **Roth IRA** (main account) and a small **Traditional
+IRA**. The old taxable account has been wound down entirely. See
+`DECISIONS.md` for why. Inside both IRAs, ex-dividend timing has no tax
+effect, so `purchase_timing.py` reports that timing "doesn't meaningfully
+matter" for them.
 
 ## Portfolio model
 
-Three tiers, target allocation of **new capital**:
+Three tiers, target allocation of **new capital** (set 2026-09-25):
 
-| Tier | Target % of new capital | Purpose | Example holdings |
+| Tier | Target | Purpose | Holdings |
 |---|---|---|---|
-| 1 | 25% | Stability anchor | VOO |
-| 2 | 65% | Primary growth/income engine -- diversified option-premium income with real total-return track record | YMAX, XYLD, SPYI |
-| 3 | 10% | Existing high-yield holdings continue harvesting; new capital deliberately minimized here | MSTY, CONY |
+| 1 | 15% | Stability anchor, plain equity, no options overlay | VOO |
+| 2 | 65% | Income engine: diversified option-premium income | SPYI, QQQI, YMAX |
+| 3 | 20% | High-payout satellites, highest decay risk, watched weekly | AMDY, MRNY |
 
-Targets shifted 2026-09-01 from 37.5/43.75/18.75 to 25/65/10, reflecting a
-3-4 year no-current-income-need horizon where maximizing eventual income
-outweighs near-term stability. See `DECISIONS.md`.
+Within a tier, `sub_weight` values in `data/tier_config.yaml` split new
+capital between funds (Tier 2: SPYI 55% / QQQI 25% / YMAX 20%; Tier 3:
+AMDY and MRNY 50/50). Target history: 37.5/43.75/18.75, then 25/65/10
+(2026-09-01), then 15/65/20 (2026-09-25). See `DECISIONS.md`.
 
-Tier 1 was intentionally set below the traditional half-of-new-capital
-weighting -- it's expected to grow on its own over time as Tier 1 holdings
-receive swept-in income from Tier 2/3 distributions. See `DECISIONS.md`.
+The horizon is 3 to 4 years with no current need for income, so
+maximizing eventual income outweighs near-term stability.
 
-Note: GOF and PDI are leveraged/credit CEFs and are tracked under Tier 2
-on the watchlist, not Tier 1 -- they carry premium/discount and leverage
-risk that doesn't belong in a "capital preservation" bucket.
+MSTY and CONY were held earlier and sold after paying 96-99% return of
+capital while their prices fell. That experience is the basis for the
+decay rule below.
 
 ## Modules
 
@@ -60,25 +60,32 @@ risk that doesn't belong in a "capital preservation" bucket.
 3. **ROC / decay tracker** (`screener/decay_tracker.py`) -- reads
    `data/distributions.csv` (manually logged from sponsor 19a-1 notices),
    flags a fund when ROC% has stayed above 90% for 3+ consecutive periods
-   *while* price is also declining over that window. **Built and working**
-   -- note: an earlier version had a real bug where the warning never fired
-   due to a numpy boolean identity-comparison error; fixed and verified,
-   see `DECISIONS.md`.
+   *while* price is also declining over that same window. Price is pulled
+   from yfinance automatically (added 2026-10-12; before that the price
+   half of the rule could never run because it needed hand-logged prices).
+   ROC% itself is still hand-logged, from the sponsors' distribution
+   tables or 19a-1 notices. If prices can't be fetched, the tool says so
+   instead of reporting "no warning." An earlier numpy boolean bug that
+   stopped the warning from ever firing is fixed; see `DECISIONS.md`.
 4. **Income tracker** (`screener/income_tracker.py`) -- combines
    `positions.yaml`, `ex_div_calendar.yaml`, and `distributions.csv` to
-   report weekly/monthly/quarterly/annual income and portfolio yield,
-   based on each holding's most recently logged real distribution.
-   **Built and working.** Requires at least one logged distribution per
-   holding to show anything.
+   report weekly/monthly/quarterly/annual income and portfolio yield.
+   Weekly funds are projected from the **average of their last 4
+   payouts** (single weekly payouts swing too much); monthly and
+   quarterly funds use the latest payout. Also prints the realized
+   "$X invested -> $Y/month" line from logged `total_received`.
+   **Built and working.**
 5. **Watchlist monitor** (`screener/watchlist_monitor.py`) -- pulls live
    price and a computed trailing-12-month yield (summed from yfinance's
    raw dividend payment history, not its built-in yield field -- that
    field is confirmed unreliable for weekly/monthly option-income funds,
    see `DECISIONS.md`) for every candidate in `tier_config.yaml`'s
    watchlist. **Built and working.**
-6. **Rollover deployment calculator** -- folded into `tier_drift.py` via
-   the `--new-capital` flag rather than built as a separate script.
-7. **DRIP consistency audit** -- not yet built.
+6. **Holdings monitor** (`screener/holdings_monitor.py`) -- live price,
+   value and trailing-12-month yield per holding. **Built and working.**
+7. **Rollover deployment calculator** -- folded into `tier_drift.py` via
+   the `--new-capital` flag, which also splits each tier by `sub_weight`.
+8. **DRIP consistency audit** -- not yet built.
 
 ## Data layer
 
@@ -111,9 +118,10 @@ pip install -r requirements.txt
 python screener\tier_drift.py
 python screener\tier_drift.py --new-capital 10000   # optional lump-sum split
 python screener\purchase_timing.py
-python screener\purchase_timing.py --symbol O        # check a single holding
+python screener\purchase_timing.py --symbol VOO      # check a single holding
 python screener\decay_tracker.py
 python screener\income_tracker.py
+python screener\holdings_monitor.py
 python screener\watchlist_monitor.py
 ```
 
@@ -121,6 +129,7 @@ See `OPERATING_MANUAL.md` for what to run when.
 
 ## Status
 
-Five modules built and verified working. DRIP consistency audit not yet
-built. A Streamlit mobile dashboard (matching the pattern already used in
+Core modules built. The decay tracker's automatic price lookup was added
+2026-10-12 and still needs a few weeks of real use to confirm. DRIP
+consistency audit not yet built. A Streamlit mobile dashboard (matching the pattern already used in
 `hypersonic-defense-screener`) is planned as a future, separate build.
