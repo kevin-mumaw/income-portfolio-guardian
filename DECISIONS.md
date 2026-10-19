@@ -237,3 +237,11 @@ a smaller diversifier. Decay rule unchanged (ROC > 90% for 3+ periods AND
 declining price). Logged 2026-10-11 -- the YAML change had not been
 committed before then.
 
+
+---
+## 2026-10-19 -- Portfolio inception date
+
+**Record:** the Income Guardian Portfolio was officially opened with a
+purchase on 2026-08-13. Any "since inception" figure should count from
+that date. (The contributions baseline row is dated 2026-09-19 because
+that is when the cumulative total was confirmed, not when investing began.)
