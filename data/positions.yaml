@@ -31,4 +31,4 @@ positions:
   # Traditional IRA -- new as of Sept 2026, Roth contributions blocked by MFS filing status
   - symbol: QQQI
     account: traditional
-    shares: 1.832340
+    shares: 2.1808
