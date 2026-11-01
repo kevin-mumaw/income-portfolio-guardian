@@ -75,12 +75,14 @@ decay rule below.
    quarterly funds use the latest payout. Also prints the realized
    "$X invested -> $Y/month" line from logged `total_received`.
    **Built and working.**
-5. **Watchlist monitor** (`screener/watchlist_monitor.py`) -- pulls live
-   price and a computed trailing-12-month yield (summed from yfinance's
-   raw dividend payment history, not its built-in yield field -- that
-   field is confirmed unreliable for weekly/monthly option-income funds,
-   see `DECISIONS.md`) for every candidate in `tier_config.yaml`'s
-   watchlist. **Built and working.**
+5. **Watchlist monitor** (`screener/watchlist_monitor.py`) -- screens every
+   candidate in `tier_config.yaml`'s watchlist against the decay rule. It
+   pulls price, trailing-12-month yield (summed from yfinance's raw payment
+   history, not its unreliable built-in field -- see `DECISIONS.md`), 1-year
+   price and total return, and the 3-month price change. ROC is logged by
+   hand per candidate (`roc_pct` in the config); without it a candidate is
+   reported INCOMPLETE. It screens; it does not rank or recommend.
+   Mock-tested; first live run pending.
 6. **Holdings monitor** (`screener/holdings_monitor.py`) -- live price,
    value and trailing-12-month yield per holding. **Built and working.**
 7. **Rollover deployment calculator** -- folded into `tier_drift.py` via

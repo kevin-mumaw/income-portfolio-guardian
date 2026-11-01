@@ -104,9 +104,10 @@ VOO is the only fund with dividends reinvested.
 ## When a fund trips the decay rule
 
 If `decay_tracker.py` flags a warning, check the watchlist in
-`tier_config.yaml` and run `python screener\watchlist_monitor.py` for
-current price and trailing yield on each candidate before choosing a
-replacement.
+`tier_config.yaml` and run `python screener\watchlist_monitor.py` to screen
+each candidate against the same decay rule. Candidates show INCOMPLETE until
+you log their recent ROC% (`roc_pct`, a list of fractions oldest first, plus
+`roc_source`) in `tier_config.yaml` from the sponsor's page or 19a-1 notice.
 
 ---
 
@@ -122,7 +123,7 @@ replacement.
 | `python screener\decay_tracker.py --symbol AMDY` | Same, for one specific holding |
 | `python screener\income_tracker.py` | Weekly/monthly/quarterly/annual income and portfolio yield from logged distributions |
 | `python screener\holdings_monitor.py` | Live price, value and trailing yield for each holding |
-| `python screener\watchlist_monitor.py` | Live price and trailing-12mo yield for every watchlist candidate |
+| `python screener\watchlist_monitor.py` | Screens every watchlist candidate: yield, 1y price/total return, 3m price, and the decay rule (needs logged ROC) |
 
 ---
 

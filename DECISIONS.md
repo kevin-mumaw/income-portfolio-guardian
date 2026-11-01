@@ -245,3 +245,25 @@ committed before then.
 purchase on 2026-08-13. Any "since inception" figure should count from
 that date. (The contributions baseline row is dated 2026-09-19 because
 that is when the cumulative total was confirmed, not when investing began.)
+
+---
+## 2026-11-01 -- watchlist_monitor.py now screens against the decay rule
+
+**Before:** it only printed price and trailing-12-month yield, plus a caution
+list. It judged nothing, and yield alone is the weakest signal (a falling
+price inflates it, a short history understates it).
+
+**Now:** per candidate it reports yield, 1-year price and total return, and
+the 3-month price change, and applies the same rule as `decay_tracker.py`
+(thresholds read from `decay_warning_rule` in `tier_config.yaml`). ROC cannot
+be pulled by API, so it is logged by hand per candidate (`roc_pct`, a list of
+fractions oldest first, or a single number). With no ROC logged the status is
+INCOMPLETE; the script never guesses. Statuses: DECAY PATTERN, WATCH (high ROC,
+price holding), PASSES RULE, INCOMPLETE. It does not score or rank.
+
+**Seeded:** GPTY (51.29%) and NVDY (94%) from the research notes already in the
+config. Both are single figures of unknown date, so NVDY reads INCOMPLETE until
+three periods are logged.
+
+**Status:** tested with a mocked yfinance (unit checks plus an end-to-end run).
+The live yfinance call has not been run yet.
