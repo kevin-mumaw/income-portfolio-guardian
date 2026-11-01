@@ -82,13 +82,13 @@ watchlist:
   - symbol: RYLD
     proposed_tier: 3   # sold from active holdings Aug 2026 -- diversification candidate if revisited
   - symbol: GPTY
-    proposed_tier: 3   # AI/tech, call-spread (not full covered call) keeps upside -- +35.46% 1yr total return, 51.29% ROC (much healthier than MSTY/CONY's 96-99%)
-    roc_pct: 0.5129   # fraction; single figure from the research note on the line above
-    roc_source: "figure from earlier research (date not recorded) -- log recent periods to apply the 3-period rule"
+    proposed_tier: 3   # AI/tech, call-spread (not full covered call) keeps upside -- +35.46% 1yr total return, 51.29% ROC (much healthier than MSTY/CONY's 96-99%) [SUPERSEDED 2026-11-01: sponsor table shows 96.5-100% ROC for the last 4 weekly payouts -- see roc_pct]
+    roc_pct: [1.0, 0.965, 1.0, 1.0]   # fractions, oldest first: ex-dates 10/7, 10/14, 10/21, 10/28/2026
+    roc_source: "YieldMax distribution table, checked 2026-11-01"
   - symbol: NVDY
-    proposed_tier: 3   # single-stock NVDA covered call -- 94% ROC like MSTY/CONY, but +30.83% 1yr / +58.76%/yr since inception (positive, unlike MSTR/COIN's collapse) -- evidence high ROC isn't disqualifying alone, weak underlying is the real issue
-    roc_pct: 0.94   # fraction; single figure from the research note on the line above
-    roc_source: "figure from earlier research (date not recorded) -- log recent periods to apply the 3-period rule"
+    proposed_tier: 3   # single-stock NVDA covered call -- 94% ROC like MSTY/CONY, but +30.83% 1yr / +58.76%/yr since inception (positive, unlike MSTR/COIN's collapse) -- evidence high ROC isn't disqualifying alone, weak underlying is the real issue [UPDATE 2026-11-01: sponsor table shows 90.61%, then 0%, 0%, 0% for the last 4 weekly payouts -- see roc_pct]
+    roc_pct: [0.9061, 0.0, 0.0, 0.0]   # fractions, oldest first: ex-dates 10/8, 10/15, 10/22, 10/29/2026
+    roc_source: "YieldMax distribution table, checked 2026-11-01"
   - symbol: AIPI
     proposed_tier: 2   # diversified AI-stock covered calls -- +20.01% 1yr total return, ~33-35% yield, less concentrated single-name risk than GPTY/NVDY
   - symbol: SCHD
