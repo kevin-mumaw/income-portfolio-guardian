@@ -299,9 +299,11 @@ to a cached result for the same window, labelled "stale price as of
 unavailable. The price window is printed with its actual dates, and the
 last-4 average prints its coverage ("3 of 4 periods logged").
 
-**Data:** `market_price` backfilled for the last 3 ex-dates per holding
-(19 rows) from yfinance closes on those dates -- not brokerage-statement
-values; replace with statement values if they differ. Logging
+**Data:** `market_price` now present for the last 3 ex-dates per holding
+(19 rows); 17 values backfilled from yfinance closes on those dates --
+not brokerage-statement values; replace with statement values if they
+differ. 2 rows (YMAX 2026-10-21, MRNY 2026-10-22) already had values in
+the file before this change and were left as-is. Logging
 market_price on every new distribution row going forward is still a
 manual step (OPERATING_MANUAL.md already requires it; this fix only
 makes the fallback usable for the recent past).
