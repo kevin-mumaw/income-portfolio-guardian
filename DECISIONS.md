@@ -267,3 +267,51 @@ three periods are logged.
 
 **Status:** tested with a mocked yfinance (unit checks plus an end-to-end run).
 The live yfinance call has not been run yet.
+
+---
+
+## 2026-11-06 -- decay_tracker.py audit fixes (findings 1-5, 7-8)
+
+**Before:** an independent audit (2026-11-06) found the module's warning
+logic sound but its data handling silently wrong in five confirmed ways:
+a blank ROC value killed the streak test while the output claimed ROC was
+"not consistently elevated" (QQQI at 100% ROC printed exactly that); "3
+consecutive periods" counted CSV rows, not ex-dates, so QQQI's Roth +
+Traditional rows for one payout counted as two periods; the logged-price
+fallback the code relies on had never been filled in for any live holding
+(0 of 48 rows); yfinance returned no prices for any symbol in one live
+run and full data minutes later, with no retry or cache; and the
+thresholds were hardcoded while watchlist_monitor.py read the same rule
+from tier_config.yaml. Two smaller issues: the price label said "last 3
+periods" even with fewer periods, and the last-4 ROC average hid how
+many periods were actually logged.
+
+**Now:** one row per (symbol, ex-date) before any test, with a visible
+CONFLICT line if two rows for one date ever disagree on a logged value.
+A missing ROC in the streak window prints "ROC data missing for <date(s)>
+-- cannot evaluate the streak" and never claims the ROC is low; a blank
+latest ROC prints "pending (not yet logged)". Thresholds are read from
+`decay_warning_rule` in tier_config.yaml with the old hardcoded values
+as fallbacks. yfinance retries 3 times with backoff, and a successful
+fetch is recorded in `data/price_cache.json`; a failed fetch falls back
+to a cached result for the same window, labelled "stale price as of
+<date>", and a run-level NOTE names any holding whose price was
+unavailable. The price window is printed with its actual dates, and the
+last-4 average prints its coverage ("3 of 4 periods logged").
+
+**Data:** `market_price` now present for the last 3 ex-dates per holding
+(19 rows); 17 values backfilled from yfinance closes on those dates --
+not brokerage-statement values; replace with statement values if they
+differ. 2 rows (YMAX 2026-10-21, MRNY 2026-10-22) already had values in
+the file before this change and were left as-is. Logging
+market_price on every new distribution row going forward is still a
+manual step (OPERATING_MANUAL.md already requires it; this fix only
+makes the fallback usable for the recent past).
+
+**Status:** verified by 15 synthetic known-answer cases (11 adapted from
+the audit plus conflict, stale-cache, and config-load cases -- all pass)
+and a live run on 2026-11-06: QQQI no longer prints the misleading line
+(2 ex-dates logged, "not enough periods"); AMDY/MRNY/VOO report their
+missing ROC dates instead of a false all-clear; SPYI and YMAX unchanged
+in outcome. Full audit at
+~/workspace/goals/the-strategic-income-playbook/files/toolkit-audit/decay-tracker-audit.md.
