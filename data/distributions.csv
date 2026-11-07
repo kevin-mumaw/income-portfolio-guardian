@@ -10,13 +10,13 @@ SPYI,2026-04-22,0.5247,,,,,,
 SPYI,2026-05-20,0.5353,,,,,,
 SPYI,2026-06-16,0.5310,,,,,,
 SPYI,2026-07-22,0.5300,,,,,,
-SPYI,2026-08-19,0.5423,,,0.95,https://neosfunds.com/spyi/,,"95% ROC YTD per NEOS 6/2026 disclosure, 98% per NEOS Dec2025 report -- but total return +8% YTD/+19% 1yr per 24/7wallst 7/2026, unlike MSTY/CONY high-ROC+negative-return pattern"
+SPYI,2026-08-19,0.5423,,52.56,0.95,https://neosfunds.com/spyi/,,"95% ROC YTD per NEOS 6/2026 disclosure, 98% per NEOS Dec2025 report -- but total return +8% YTD/+19% 1yr per 24/7wallst 7/2026, unlike MSTY/CONY high-ROC+negative-return pattern"
 VOO,2025-03-27,1.8121,,,,,,
 VOO,2025-06-30,1.7447,,,,,,
 VOO,2025-09-29,1.74,,,,,,
 VOO,2025-12-22,1.771,,,,,,
-VOO,2026-03-27,1.8724,,,,,,
-VOO,2026-06-26,1.9622,,,,,,
+VOO,2026-03-27,1.8724,,579.78,,,,
+VOO,2026-06-26,1.9622,,668.54,,,,
 RYLD,2026-08-27,0.1653,,,,,,received while held -- position since sold
 THW,2026-08-31,0.1167,,,,,,received while held -- position since sold
 YMAX,2026-08-26,0.0590,,,0.4284,https://yieldmaxetfs.com/our-etfs/ymax/,2.70,received $2.70
@@ -30,15 +30,15 @@ CONY,2026-09-03,0.2729,,,,,2.12,"received $2.12, based on pre-rollover share cou
 YMAX,2026-09-09,0.0598,,,0.6780,https://yieldmaxetfs.com/our-etfs/ymax/,28.56,"received $28.56, based on 477.5979 shares (pre-$200-purchase)"
 AMDY,2026-09-10,0.3763,,,0.0000,https://yieldmaxetfs.com/our-etfs/amdy/,8.19,"received $8.19, based on 21.776198 shares"
 YMAX,2026-09-16,0.0582,,,0.6869,https://yieldmaxetfs.com/our-etfs/ymax/,36.36,"received $36.36, matches current full share count (624.703307)"
-SPYI,2026-09-16,0.5338,,,0.94,https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice-9.16.26-Confidential.pdf,95.39,"received $95.39, matches current full share count (178.694700) | 19a-1: 94% ROC this payout (96% fiscal YTD), $0.5338/share confirmed"
-QQQI,2026-09-16,0.6339,,,,,9.90,"received $9.90, roth account, matches current full share count (15.618523)"
-QQQI,2026-09-16,0.6339,,,,,1.16,"received $1.16, traditional account, matches current full share count (1.832340)"
+SPYI,2026-09-16,0.5338,,51.98,0.94,https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice-9.16.26-Confidential.pdf,95.39,"received $95.39, matches current full share count (178.694700) | 19a-1: 94% ROC this payout (96% fiscal YTD), $0.5338/share confirmed"
+QQQI,2026-09-16,0.6339,,52.65,,,9.90,"received $9.90, roth account, matches current full share count (15.618523)"
+QQQI,2026-09-16,0.6339,,52.65,,,1.16,"received $1.16, traditional account, matches current full share count (1.832340)"
 MRNY,2026-09-17,0.5672,,,0.0000,https://yieldmaxetfs.com/our-etfs/mrny/,1.04,"first-ever MRNY distribution, matches current full share count (1.825928)"
 AMDY,2026-09-17,0.3906,,,0.0000,https://yieldmaxetfs.com/our-etfs/amdy/,12.98,matches current post-sale share count (33.207893)
 YMAX,2026-09-23,0.0596,,,0.0812,https://yieldmaxetfs.com/our-etfs/ymax/,37.23,"received $37.23, matches current full share count (624.703307)"
 AMDY,2026-09-24,0.7791,,,0.9736,https://yieldmaxetfs.com/our-etfs/amdy/,25.87,"received $25.87, matches current full share count (33.207893) -- roughly 2x prior cycle rate"
 MRNY,2026-09-24,0.6367,,,0.9886,https://yieldmaxetfs.com/our-etfs/mrny/,27.27,"received $27.27, matches current full share count (42.825928)"
-VOO,2026-09-28,1.823,,,,,15.50,"received $15.50 on 8.504017 shares (1.823 x 8.504017 = 15.50); DRIP reinvested; ex-date and rate confirmed by yfinance"
+VOO,2026-09-28,1.823,,703.61,,,15.50,"received $15.50 on 8.504017 shares (1.823 x 8.504017 = 15.50); DRIP reinvested; ex-date and rate confirmed by yfinance"
 YMAX,2026-09-30,0.0596,,,0.2649,https://yieldmaxetfs.com/our-etfs/ymax/,41.89,"received $41.89, matches current full share count (702.798421)"
 MRNY,2026-10-01,0.8073,,,0.9938,https://yieldmaxetfs.com/our-etfs/mrny/,54.81,"received $54.81, matches current full share count (67.895995)"
 AMDY,2026-10-01,0.9871,,,0.9804,https://yieldmaxetfs.com/our-etfs/amdy/,51.98,"received $51.98, matches current full share count (52.659231)"
@@ -59,15 +59,15 @@ MRNY,2026-08-06,0.2038,,,0.9500,https://yieldmaxetfs.com/our-etfs/mrny/,,sponsor
 YMAX,2026-10-14,0.0594,,,0.1521,https://yieldmaxetfs.com/our-etfs/ymax/,66.87,received $66.87 on 1125.6921 shares
 AMDY,2026-10-15,0.6677,,,0.0000,https://yieldmaxetfs.com/our-etfs/amdy/,54.58,received $54.58 on 81.7457 shares
 MRNY,2026-10-15,0.8112,,,0.9942,https://yieldmaxetfs.com/our-etfs/mrny/,79.33,received $79.33 on 97.7912 shares
-YMAX,2026-10-21,0.0563,,,0.1132,https://yieldmaxetfs.com/our-etfs/ymax/,64.83,received $64.83 on 1151.5674 shares
-QQQI,2026-10-21,0.6343,,,1.0000,https://neosfunds.com/wp-content/uploads/QQQI-19a-1-Notice-10.21.26-Confidential.pdf,82.69,"received $82.69, roth account, 130.3633 shares | 19a-1: 100% ROC anticipated (book-basis estimate)"
-SPYI,2026-10-21,0.5087,,,0.9900,https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice-10.21.26-Confidential.pdf,98.24,"received $98.24, roth account, 193.122 shares | 19a-1: 99% ROC anticipated (book-basis estimate)"
-AMDY,2026-10-22,0.3387,,,0.0000,https://yieldmaxetfs.com/our-etfs/amdy/,28.17,received $28.17 on 83.1692 shares
-MRNY,2026-10-22,0.8851,,,0.6981,https://yieldmaxetfs.com/our-etfs/mrny/,88.51,received $88.51 on 100.0046 shares
-QQQI,2026-10-21,0.6343,,,1.0000,https://neosfunds.com/wp-content/uploads/QQQI-19a-1-Notice-10.21.26-Confidential.pdf,1.38,"received $1.38, traditional account | 19a-1: 100% ROC anticipated (book-basis estimate); 2.1808 shares held (confirmed by Kevin)"
-YMAX,2026-10-28,0.0554,,,0.3495,https://yieldmaxetfs.com/our-etfs/ymax/,64.50,received $64.50 on 1164.3062 shares
-AMDY,2026-10-29,0.3559,,,0.0000,https://yieldmaxetfs.com/our-etfs/amdy/,31.08,received $31.08 on 87.3359 shares
-MRNY,2026-10-29,0.5394,,,0.0000,https://yieldmaxetfs.com/our-etfs/mrny/,57.62,received $57.62 on 106.8273 shares
-YMAX,2026-11-04,0.0528,,,0.2947,https://yieldmaxetfs.com/our-etfs/ymax/,63.10,received $63.10 on 1195.0091 shares
-AMDY,2026-11-05,0.3361,,,,https://yieldmaxetfs.com/our-etfs/amdy/,29.35,received $29.35 on 87.3359 shares | ROC pending: sponsor table not yet updated for 11/5 as of 11/6
-MRNY,2026-11-05,0.7297,,,,https://yieldmaxetfs.com/our-etfs/mrny/,80.62,received $80.62 on 110.4819 shares | ROC pending: sponsor table not yet updated for 11/5 as of 11/6
+YMAX,2026-10-21,0.0563,,7.32,0.1132,https://yieldmaxetfs.com/our-etfs/ymax/,64.83,received $64.83 on 1151.5674 shares
+QQQI,2026-10-21,0.6343,,54.00,1.0000,https://neosfunds.com/wp-content/uploads/QQQI-19a-1-Notice-10.21.26-Confidential.pdf,82.69,"received $82.69, roth account, 130.3633 shares | 19a-1: 100% ROC anticipated (book-basis estimate)"
+SPYI,2026-10-21,0.5087,,53.41,0.9900,https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice-10.21.26-Confidential.pdf,98.24,"received $98.24, roth account, 193.122 shares | 19a-1: 99% ROC anticipated (book-basis estimate)"
+AMDY,2026-10-22,0.3387,,40.27,0.0000,https://yieldmaxetfs.com/our-etfs/amdy/,28.17,received $28.17 on 83.1692 shares
+MRNY,2026-10-22,0.8851,,37.96,0.6981,https://yieldmaxetfs.com/our-etfs/mrny/,88.51,received $88.51 on 100.0046 shares
+QQQI,2026-10-21,0.6343,,54.00,1.0000,https://neosfunds.com/wp-content/uploads/QQQI-19a-1-Notice-10.21.26-Confidential.pdf,1.38,"received $1.38, traditional account | 19a-1: 100% ROC anticipated (book-basis estimate); 2.1808 shares held (confirmed by Kevin)"
+YMAX,2026-10-28,0.0554,,7.16,0.3495,https://yieldmaxetfs.com/our-etfs/ymax/,64.50,received $64.50 on 1164.3062 shares
+AMDY,2026-10-29,0.3559,,44.22,0.0000,https://yieldmaxetfs.com/our-etfs/amdy/,31.08,received $31.08 on 87.3359 shares
+MRNY,2026-10-29,0.5394,,40.35,0.0000,https://yieldmaxetfs.com/our-etfs/mrny/,57.62,received $57.62 on 106.8273 shares
+YMAX,2026-11-04,0.0528,,6.97,0.2947,https://yieldmaxetfs.com/our-etfs/ymax/,63.10,received $63.10 on 1195.0091 shares
+AMDY,2026-11-05,0.3361,,32.52,,https://yieldmaxetfs.com/our-etfs/amdy/,29.35,received $29.35 on 87.3359 shares | ROC pending: sponsor table not yet updated for 11/5 as of 11/6
+MRNY,2026-11-05,0.7297,,43.13,,https://yieldmaxetfs.com/our-etfs/mrny/,80.62,received $80.62 on 110.4819 shares | ROC pending: sponsor table not yet updated for 11/5 as of 11/6
