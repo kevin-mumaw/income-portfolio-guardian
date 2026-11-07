@@ -315,3 +315,70 @@ and a live run on 2026-11-06: QQQI no longer prints the misleading line
 missing ROC dates instead of a false all-clear; SPYI and YMAX unchanged
 in outcome. Full audit at
 ~/workspace/goals/the-strategic-income-playbook/files/toolkit-audit/decay-tracker-audit.md.
+
+---
+
+## 2026-11-06/07 -- income_tracker.py audit fixes (findings 1-8)
+
+**Before:** an independent audit (2026-11-06/07) found the projection math
+correct -- every per-holding number recomputed by hand matches, and the
+$1,003.27/mo headline is the most trustworthy number the module prints --
+but two headline numbers were live-wrong and the data handling around the
+math had no guardrails. (1) The portfolio yield was computed on whatever
+prices yfinance happened to return: one live run printed 52.48% against
+a true 29.99% because SPYI and VOO failed to fetch and were dropped from
+the denominator while their income stayed in the numerator. (2) The
+trailing-30 "actually received" figure ($890.87) swung $149.67 on the
+time of day alone, because the window anchored to datetime.now() while
+rows are stamped at midnight; the $112.40 projected-vs-received gap
+decomposes exactly into share-count growth (+$44.09) and window/cycle
+mechanics (+$68.31) -- nothing in it is a payout shortfall. Also:
+hand-logged per-share amounts were taken on trust (a decimal slip moves
+a monthly fund 10x); duplicate rows for one ex-date double-weighted a
+payout week; no staleness or thin-data check; monthly/quarterly funds
+used latest-only while weekly funds got a 4-average; the headline never
+mentioned that ~45% of it is return of capital; the trailing sum counted
+sold positions and used ex-date, not pay date.
+
+**Now:** yield is never printed on a partial denominator -- if any price
+fetch fails, the yield is omitted with "yield unavailable -- price fetch
+failed for <symbols>" printed where the yield would be; yfinance retries
+3 times with backoff and a successful fetch is cached in
+data/price_cache.json, with a stale cached price labelled "stale price
+as of <date>". The retrospective comparator is a date-anchored trailing
+4 full weeks (28 days) over held symbols only, with the same payouts
+repriced at today's share counts and the gap decomposition printed
+instead of two bare numbers. Per-share values are validated on load
+(non-positive excluded; a value >3x the median of the symbol's other
+logged payouts is flagged as a likely logging slip and excluded -- high
+side only, since a low value is usually a real payout cut and flagging
+both sides would exclude the good value too when only two payouts are
+logged). Rows collapse to one per (symbol, ex-date) with a visible
+CONFLICT line on disagreement. Each holding prints last-logged date and
+distinct payout count, with STALE flags past ~2 payout cycles and
+thin-data notes. Monthly/quarterly funds still project from the latest
+payout -- the headline stays $1,003.27/mo -- but the last-4 average is
+printed alongside (SPYI latest is $4.00/mo below its 4-month average).
+The ROC share of projected income is printed (~$455.34/mo, 45%, VOO
+pending so a lower bound) and the total is labelled gross distributions,
+with the note that distributions are counted as received whether taken
+as cash or reinvested (the toolkit does not track reinvestment). The
+trailing window is labelled with its dates and its ex-date basis.
+Contributions: a second row whose note says "cumulative" is warned
+about and excluded, not added. Bad ex-dates/amounts are named warnings,
+not tracebacks; zero-share positions are noted, not vanished.
+
+**Shared helpers:** the CSV loading/validation/dedupe lives in
+screener/distributions.py and the retry+cache price fetch in
+screener/price_fetch.py, both used by income_tracker.py.
+decay_tracker.py was deliberately left untouched in this PR (it has its
+own inline implementations from the 2026-11-06 fix); migrating it onto
+the shared helpers is a small follow-up PR.
+
+**Status:** verified by 41 synthetic/live-data known-answer cases (35
+adapted from the audit plus stale-cache, retry, ROC-display, and
+same-day-determinism cases -- all pass) and two live runs on 2026-11-07:
+projection $1,003.27/mo unchanged, yield 29.99% with all six prices,
+trailing 4-week actual $890.87 at current shares $934.96, decomposition
++$44.09 growth + $68.31 cycle = $112.40. Full audit at
+~/workspace/goals/the-strategic-income-playbook/files/toolkit-audit/income-tracker-audit.md.
