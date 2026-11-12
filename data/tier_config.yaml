@@ -59,24 +59,44 @@ holdings:
 watchlist:
   - symbol: GOF
     proposed_tier: 2   # leveraged credit CEF -- Tier 2, not Tier 1, see DECISIONS.md
+    roc_pct: [0.6918, 0.7141, 0.7038, 0.7055]   # fractions, oldest first: ex-dates 6/15, 7/15, 8/14, 9/15/2026
+    roc_source: "Guggenheim Section 19(a) notice, checked 2026-11-12"
   - symbol: PDI
     proposed_tier: 2   # leveraged credit CEF -- Tier 2, not Tier 1, see DECISIONS.md
+    roc_pct: [0.2621]   # fractions, oldest first: ex-date 10/13/2026 -- Oct only; Sep/Aug 19(a) notices not found
+    roc_source: "PIMCO Section 19(a) notice, checked 2026-11-12 -- paid-in surplus incl. paired-swap gains (mixed bucket, not clean ROC)"
   - symbol: FEPI
     proposed_tier: 2
+    roc_pct: [1.0, 1.0, 1.0, 1.0]   # fractions, oldest first: ex-dates 9/30, 10/7, 10/14, 10/21/2026
+    roc_source: "REX Shares 19a-1 notices (rexshares.com), checked 2026-11-12"
   - symbol: STK
     proposed_tier: 2   # tech CEF, 2026 distributions 100% realized cap gains, not ROC
+    roc_pct: [0.0, 0.0, 0.0, 0.0]   # fractions, oldest first: ex-dates 2/17, 5/18, 8/17, 10/19/2026
+    roc_source: "Columbia Threadneedle Section 19(a) notice, checked 2026-11-12"
   - symbol: IDVO
     proposed_tier: 2   # international diversification, covered call
+    roc_pct: [0.5745, 0.709, 0.9054]   # fractions, oldest first: ex-dates 7/30, 8/28, 9/29/2026
+    roc_source: "Amplify ETFs Rule 19a-1 Notices of Source of Distributions, checked 2026-11-12"
   - symbol: JEPI
     proposed_tier: 2   # diversified S&P 500, selective ELN overlay, lower cap on upside than XYLD
+    roc_pct: [0.0, 0.0, 0.0]   # PROXY -- fractions, oldest first: ex-dates 9/1, 10/1, 11/2/2026; no per-distribution 19a-1 published, annual ROC 0%
+    roc_source: "J.P. Morgan 2025 ETF distribution notice (ROC 0% calendar 2025); ETFIQ 0.0% FY to Jun 30, 2026, checked 2026-11-12"
   - symbol: DIVO
     proposed_tier: 2   # blue-chip dividend payers, tactical covered calls, lower tech weight
+    roc_pct: [0.8974, 0.5773, 0.681]   # fractions, oldest first: ex-dates 7/30, 8/28, 9/29/2026
+    roc_source: "Amplify ETFs Rule 19a-1 Notices of Source of Distributions, checked 2026-11-12"
   - symbol: PFFA
     proposed_tier: 2   # preferred stock income, financials/utilities heavy, non-equity diversifier
+    roc_pct: [0.1351, 0.1351, 0.1351, 0.1351]   # fractions, oldest first: ex-dates 7/20, 8/20, 9/21, 10/20/2026 -- flat 19(a) estimate ($0.0233 each month), not four independent readings
+    roc_source: "Virtus Section 19(a) notice, checked 2026-11-12"
   - symbol: ARCC
     proposed_tier: 2   # BDC, real earnings coverage, no options overlay
+    roc_pct: [0.0, 0.0, 0.0, 0.0]   # annual 1099 character applied per period: ex-dates 3/14, 6/13, 9/15, 12/15/2025; 2026 character not final until early 2027
+    roc_source: "Ares Capital Letter to Stockholders on the Tax Status of 2025 Distributions, checked 2026-11-12"
   - symbol: MAIN
     proposed_tier: 2   # BDC, real earnings coverage, monthly + supplemental div
+    roc_pct: [0.0, 0.0, 0.0, 0.0]   # annual 1099 character applied per period: ex-dates 10/8, 11/7, 12/8, 12/22/2025; 2026 character not final until early 2027
+    roc_source: "Main Street Capital Tax Status of Distributions for the Year Ended 12/31/2025, checked 2026-11-12"
   - symbol: UTG
     proposed_tier: 1   # utility CEF, lower volatility, Tier 1/2 boundary candidate
   - symbol: RYLD
@@ -99,6 +119,8 @@ watchlist:
     roc_source: "YieldMax distribution table, checked 2026-11-12"
   - symbol: AIPI
     proposed_tier: 2   # diversified AI-stock covered calls -- +20.01% 1yr total return, ~33-35% yield, less concentrated single-name risk than GPTY/NVDY
+    roc_pct: [1.0, 1.0, 1.0, 1.0]   # fractions, oldest first: ex-dates 9/30, 10/7, 10/14, 10/21/2026
+    roc_source: "REX Shares 19a-1 notices (rexshares.com), checked 2026-11-12"
   - symbol: SCHD
     proposed_tier: 1   # VOO alternative -- quality/dividend-growth screen, ~3% yield, 13.65%/yr since 2011 inception, not an income-tier fit
   - symbol: CGDV

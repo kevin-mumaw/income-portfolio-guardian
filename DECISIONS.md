@@ -428,3 +428,45 @@ all pass. Live run NOT verified: on 2026-11-12 Yahoo returned HTTP 429
 (VOO probe: 0 rows) and all 20 candidates landed in "Could not fetch
 data" with reasons -- the module fails safe and fabricates no ranking.
 The first live ranking needs a machine where Yahoo is not throttling.
+
+---
+
+## 2026-11-12 -- Tier 2 ROC logged for all 11 candidates
+
+**Before:** no Tier 2 candidate had ROC logged, so the ranker left the
+whole tier unevaluated and there was no Tier 2 #1.
+
+**Now:** roc_pct logged in data/tier_config.yaml for all 11 Tier 2
+names, from sponsor 19(a) notices / tax letters (checked 2026-11-12):
+FEPI [1.0 x4] and AIPI [1.0 x4] (REX 19a-1); IDVO [0.5745, 0.709,
+0.9054] and DIVO [0.8974, 0.5773, 0.681] (Amplify 19a-1, fractions
+recomputed from the sponsor dollars); GOF [0.6918, 0.7141, 0.7038,
+0.7055] (Guggenheim 19a); STK [0.0 x4] (Columbia 19a -- 100% capital
+gains); PFFA [0.1351 x4] (Virtus 19a); ARCC [0.0 x4] and MAIN [0.0 x4]
+(annual 1099 character applied per period, flagged in-file); PDI
+[0.2621] Oct only (Sep/Aug 19a not found -- still unevaluated); JEPI
+[0.0 x3] as a flagged annual-character proxy (JPMorgan publishes no
+per-distribution 19a-1; annual ROC 0% is structural, ELN income taxed
+as ordinary income).
+
+**Verified:** FEPI 100%, IDVO Sep 91%, PDI Oct 26.21% checked directly
+against the sponsor documents; IDVO/DIVO/GOF/PFFA fractions recomputed
+from the sponsor dollar amounts.
+
+**Known limits:** every 19(a) figure is the sponsor's estimate, not
+final tax character -- final on Form 1099-DIV (Jan 2027). DIVO's Dec
+2025 payment was estimated 94% ROC and reclassified to 0% final, so
+estimates can move. PFFA's 13.51% is one flat repeated estimate, not
+four independent readings. PDI's 26.21% is paid-in surplus incl.
+paired-swap gains (mixed bucket, not clean ROC). ARCC/MAIN 0.0s must
+not be extended into 2026 -- re-check when the 2026 tax letters
+publish (early 2027). JEPI's 0.0 is a proxy, flagged in the config.
+
+**Status:** live run after logging -- Tier 2 ranks JEPI 83.9 / ARCC
+81.6 / MAIN 79.6 (also ranked: PFFA 76.7, STK 65.2, IDVO 56.4, DIVO
+43.9, GOF 42.1); FEPI and AIPI both flagged DECAY PATTERN (100% ROC
+with falling prices); PDI still unevaluated (1 period). JEPI's #1 rests
+on the proxy ROC score -- its lead is softer than ARCC/MAIN's, whose
+0.0s are sponsor-verified annual character. ARCC/MAIN size factor
+skipped (yfinance returns no AUM for BDCs); weights renormalized, as
+designed.
