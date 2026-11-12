@@ -382,3 +382,49 @@ projection $1,003.27/mo unchanged, yield 29.99% with all six prices,
 trailing 4-week actual $890.87 at current shares $934.96, decomposition
 +$44.09 growth + $68.31 cycle = $112.40. Full audit at
 ~/workspace/goals/the-strategic-income-playbook/files/toolkit-audit/income-tracker-audit.md.
+
+---
+
+## 2026-11-12 -- rank_watchlist.py ranks the watchlist per tier
+
+**Before:** watchlist_monitor.py screens candidates against the decay rule
+but explicitly does not score or recommend, so "which fund replaces this
+one?" had no answer beyond eyeballing the screen.
+
+**Now:** screener/rank_watchlist.py layers a ranking on the screen. Gate
+first, then rank: a DECAY PATTERN classification (imported from
+watchlist_monitor.classify, not reimplemented, so screen and ranking
+cannot disagree) excludes the candidate; fewer than the rule's 3 ROC
+periods logged is unevaluated, not ranked -- deliberately stricter than
+the monitor, where a single 0% ROC value reads PASSES RULE. WATCH is
+ranked with the flag shown. Factor scores are fixed formulas, each
+0-100: ROC (mean of last up-to-4 logged values, +10/-10 trend
+adjustment), payout stability (100 * (1 - population CV) over the last
+12 payments), total return (1y total return, -30% -> 0, +60% -> 100),
+size (log10 AUM, $1M -> 0, $1B -> 100), payout size for Tier 3
+(trailing yield capped at 60%), expense and track record for Tier 1.
+Weights: Tier 1 total return 50% / expense 25% / track record 25%;
+Tier 2 ROC 35% / stability 25% / total return 25% / size 15%; Tier 3
+total return 35% / ROC 30% / payout size 20% / size 15%. A missing
+factor is skipped and the remaining weights renormalize proportionally,
+noted on the candidate's line -- never silently zeroed. Output is top 3
+per tier with every factor score shown, then Flagged and Unevaluated
+sections with reasons; --tier N shows one tier. Yield is shown but only
+scored in Tier 3 (capped), since a falling price inflates it.
+
+**Known limits:** ROC is hand-logged, so a stale entry ranks the wrong
+fund. yfinance info (AUM, expense ratio, inception date) is unreliable
+-- a missing field skips that factor. 1-year figures cover a shorter
+span for funds under a year old (marked "short history"). Scores are
+comparative within a tier, not a buy recommendation. watchlist_monitor.py
+is untouched.
+
+**Status:** verified by 77 synthetic known-answer cases in
+scratch/test_rank_cases.py (gate behavior incl. the stricter-than-monitor
+YSKH case, every factor formula incl. boundary/clamp cases, weight
+renormalization, ordering with a known #1, tie-break, output shape) --
+all pass. Live run NOT verified: on 2026-11-12 Yahoo returned HTTP 429
+(rate-limited) on the shared egress IP, so yfinance fetched nothing
+(VOO probe: 0 rows) and all 20 candidates landed in "Could not fetch
+data" with reasons -- the module fails safe and fabricates no ranking.
+The first live ranking needs a machine where Yahoo is not throttling.
