@@ -82,13 +82,21 @@ watchlist:
   - symbol: RYLD
     proposed_tier: 3   # sold from active holdings Aug 2026 -- diversification candidate if revisited
   - symbol: GPTY
-    proposed_tier: 3   # AI/tech, call-spread (not full covered call) keeps upside -- +35.46% 1yr total return, 51.29% ROC (much healthier than MSTY/CONY's 96-99%) [SUPERSEDED 2026-11-01: sponsor table shows 96.5-100% ROC for the last 4 weekly payouts -- see roc_pct]
-    roc_pct: [1.0, 0.965, 1.0, 1.0]   # fractions, oldest first: ex-dates 10/7, 10/14, 10/21, 10/28/2026
-    roc_source: "YieldMax distribution table, checked 2026-11-01"
+    proposed_tier: 3   # AI/tech, call-spread (not full covered call) keeps upside -- +35.46% 1yr total return, 51.29% ROC (much healthier than MSTY/CONY's 96-99%) [UPDATE 2026-11-12: ROC broke lower the last two weeks -- 49.09% then 13.76% -- after 100% on 10/21 and 10/28; streak broken, watch whether it holds]
+    roc_pct: [1.0, 1.0, 0.4909, 0.1376]   # fractions, oldest first: ex-dates 10/21, 10/28, 11/4, 11/12/2026
+    roc_source: "YieldMax distribution table, checked 2026-11-12"
   - symbol: NVDY
-    proposed_tier: 3   # single-stock NVDA covered call -- 94% ROC like MSTY/CONY, but +30.83% 1yr / +58.76%/yr since inception (positive, unlike MSTR/COIN's collapse) -- evidence high ROC isn't disqualifying alone, weak underlying is the real issue [UPDATE 2026-11-01: sponsor table shows 90.61%, then 0%, 0%, 0% for the last 4 weekly payouts -- see roc_pct]
-    roc_pct: [0.9061, 0.0, 0.0, 0.0]   # fractions, oldest first: ex-dates 10/8, 10/15, 10/22, 10/29/2026
-    roc_source: "YieldMax distribution table, checked 2026-11-01"
+    proposed_tier: 3   # single-stock NVDA covered call -- 94% ROC like MSTY/CONY, but +30.83% 1yr / +58.76%/yr since inception (positive, unlike MSTR/COIN's collapse) -- evidence high ROC isn't disqualifying alone, weak underlying is the real issue [UPDATE 2026-11-12: last 4 weekly ROCs 0%, 0%, 100%, 0% -- no streak above 90%]
+    roc_pct: [0.0, 0.0, 1.0, 0.0]   # fractions, oldest first: ex-dates 10/22, 10/29, 11/5, 11/12/2026
+    roc_source: "YieldMax distribution table, checked 2026-11-12"
+  - symbol: MUY
+    proposed_tier: 3   # single-stock MU covered call, launched 9/29/2026 -- DECAY PATTERN as of 11/12: ROC 89.76%, 100%, 100%, 94.78%, 92.20% over its first 5 payouts with price -13.7% in the last month; only $4.7M AUM (closure risk) -- watch, do not buy
+    roc_pct: [0.8976, 1.0, 1.0, 0.9478, 0.9220]   # fractions, oldest first: ex-dates 10/15, 10/22, 10/29, 11/5, 11/12/2026
+    roc_source: "YieldMax distribution table, checked 2026-11-12"
+  - symbol: YSKH
+    proposed_tier: 3   # single-stock SK hynix covered call, launched 10/27/2026 -- only 1 payout so far ($0.3516, ROC 0.00% on 11/12); cannot evaluate the decay rule yet, needs 2+ more weeks; only $1.2M AUM -- watch
+    roc_pct: [0.0]   # fractions, oldest first: ex-date 11/12/2026
+    roc_source: "YieldMax distribution table, checked 2026-11-12"
   - symbol: AIPI
     proposed_tier: 2   # diversified AI-stock covered calls -- +20.01% 1yr total return, ~33-35% yield, less concentrated single-name risk than GPTY/NVDY
   - symbol: SCHD
