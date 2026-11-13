@@ -470,3 +470,7 @@ on the proxy ROC score -- its lead is softer than ARCC/MAIN's, whose
 0.0s are sponsor-verified annual character. ARCC/MAIN size factor
 skipped (yfinance returns no AUM for BDCs); weights renormalized, as
 designed.
+
+## 2026-11-13 -- Tier 1 names removed from the watchlist
+
+Removed SCHD, CGDV, FDVV, and UTG from the watchlist at Kevin's call. Tier 1 is settled on VOO -- not replacing it, no split -- so a Tier 1 bench serves no purpose; the names were in tier_config.yaml from the original setup, not added by the ranker (the ranker only reads the config). Watchlist is now Tier 2 and Tier 3 only (16 candidates on this branch; 17 once the YANT addition in PR #10 lands). The monitor and ranker no longer report a Tier 1 section. If the Tier 1 slot's goal ever changes, the bench can be re-added then.

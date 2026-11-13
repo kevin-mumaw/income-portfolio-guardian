@@ -97,8 +97,6 @@ watchlist:
     proposed_tier: 2   # BDC, real earnings coverage, monthly + supplemental div
     roc_pct: [0.0, 0.0, 0.0, 0.0]   # annual 1099 character applied per period: ex-dates 10/8, 11/7, 12/8, 12/22/2025; 2026 character not final until early 2027
     roc_source: "Main Street Capital Tax Status of Distributions for the Year Ended 12/31/2025, checked 2026-11-12"
-  - symbol: UTG
-    proposed_tier: 1   # utility CEF, lower volatility, Tier 1/2 boundary candidate
   - symbol: RYLD
     proposed_tier: 3   # sold from active holdings Aug 2026 -- diversification candidate if revisited
   - symbol: GPTY
@@ -121,12 +119,6 @@ watchlist:
     proposed_tier: 2   # diversified AI-stock covered calls -- +20.01% 1yr total return, ~33-35% yield, less concentrated single-name risk than GPTY/NVDY
     roc_pct: [1.0, 1.0, 1.0, 1.0]   # fractions, oldest first: ex-dates 9/30, 10/7, 10/14, 10/21/2026
     roc_source: "REX Shares 19a-1 notices (rexshares.com), checked 2026-11-12"
-  - symbol: SCHD
-    proposed_tier: 1   # VOO alternative -- quality/dividend-growth screen, ~3% yield, 13.65%/yr since 2011 inception, not an income-tier fit
-  - symbol: CGDV
-    proposed_tier: 1   # VOO alternative -- actively managed quality tilt, ~1.2% yield, ~19%/yr since 2022 inception, newer track record than SCHD
-  - symbol: FDVV
-    proposed_tier: 1   # VOO alternative -- passive quality dividend-growth index, ~2.8-3.3% yield, 18.1%/1yr and 19.5%/3yr total return, 0.15% expense ratio
 
 decay_warning_rule:
   roc_pct_threshold: 0.90
