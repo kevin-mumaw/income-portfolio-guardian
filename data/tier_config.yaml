@@ -127,6 +127,8 @@ watchlist:
     proposed_tier: 1   # VOO alternative -- actively managed quality tilt, ~1.2% yield, ~19%/yr since 2022 inception, newer track record than SCHD
   - symbol: FDVV
     proposed_tier: 1   # VOO alternative -- passive quality dividend-growth index, ~2.8-3.3% yield, 18.1%/1yr and 19.5%/3yr total return, 0.15% expense ratio
+  - symbol: YANT
+    proposed_tier: 3   # single-stock Anthropic (ANT) synthetic covered call -- FILED, NOT LAUNCHED: prospectus in Tidal Trust II 485BPOS 11/06/2026; Anthropic has not IPO'd, so no price and no distributions yet; 1.01% expense ratio; add roc_pct once distributions begin, needs 3+ periods to evaluate
 
 decay_warning_rule:
   roc_pct_threshold: 0.90
