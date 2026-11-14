@@ -470,3 +470,7 @@ on the proxy ROC score -- its lead is softer than ARCC/MAIN's, whose
 0.0s are sponsor-verified annual character. ARCC/MAIN size factor
 skipped (yfinance returns no AUM for BDCs); weights renormalized, as
 designed.
+
+## 2026-11-13 -- YANT added to watchlist (filed, not launched)
+
+YANT (YieldMax ANT Option Income Strategy ETF) added as a Tier 3 watchlist candidate at Kevin's yes. Single-stock synthetic covered call on Anthropic (ANT), 1.01% expense ratio per the prospectus (Tidal Trust II 485BPOS, 11/06/2026). Anthropic has not yet IPO'd, so YANT has no price and no distributions -- the monitor lists it as a fetch failure until it trades, and it cannot be evaluated or ranked until 3+ ROC periods are logged. One of 12 Anthropic ETFs filed by six sponsors in late Oct / early Nov 2026, half of them inverse. Add roc_pct from the YieldMax distribution table once distributions begin.
