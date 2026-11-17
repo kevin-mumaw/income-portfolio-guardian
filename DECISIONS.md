@@ -474,3 +474,7 @@ designed.
 ## 2026-11-13 -- YANT added to watchlist (filed, not launched)
 
 YANT (YieldMax ANT Option Income Strategy ETF) added as a Tier 3 watchlist candidate at Kevin's yes. Single-stock synthetic covered call on Anthropic (ANT), 1.01% expense ratio per the prospectus (Tidal Trust II 485BPOS, 11/06/2026). Anthropic has not yet IPO'd, so YANT has no price and no distributions -- the monitor lists it as a fetch failure until it trades, and it cannot be evaluated or ranked until 3+ ROC periods are logged. One of 12 Anthropic ETFs filed by six sponsors in late Oct / early Nov 2026, half of them inverse. Add roc_pct from the YieldMax distribution table once distributions begin.
+
+## 2026-11-13 -- Tier 1 names removed from the watchlist
+
+Removed SCHD, CGDV, FDVV, and UTG from the watchlist at Kevin's call. Tier 1 is settled on VOO -- not replacing it, no split -- so a Tier 1 bench serves no purpose; the names were in tier_config.yaml from the original setup, not added by the ranker (the ranker only reads the config). Watchlist is now Tier 2 and Tier 3 only (16 candidates on this branch; 17 once the YANT addition in PR #10 lands). The monitor and ranker no longer report a Tier 1 section. If the Tier 1 slot's goal ever changes, the bench can be re-added then.
