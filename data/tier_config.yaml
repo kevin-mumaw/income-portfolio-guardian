@@ -10,7 +10,7 @@
 targets:
   tier_1: 0.15   # VOO -- stability anchor; lowered from 25% on 2026-09-25 (see DECISIONS.md)
   tier_2: 0.65   # SPYI/QQQI/YMAX -- primary income engine
-  tier_3: 0.20   # AMDY/MRNY -- raised from 10%; deliberate higher-yield sleeve, decay risk monitored
+  tier_3: 0.20   # MRNY (AMDY exited 2026-11-20) -- raised from 10%; deliberate higher-yield sleeve, decay risk monitored
 
 holdings:
   - symbol: VOO
@@ -23,19 +23,14 @@ holdings:
     account: roth
     sub_weight: 0.20  # per-tier share of new Tier 2 capital -- see DECISIONS.md
 
-  - symbol: AMDY
-    tier: 3
-    account: roth
-    sub_weight: 0.50  # per-tier share of new Tier 3 capital -- rebalanced Sept 2026 toward a deliberate 50/50 split with MRNY -- see DECISIONS.md
-
   - symbol: MRNY
     tier: 3                # single-stock YieldMax synthetic covered call on Moderna (MRNA) -- same
-                            # family as AMDY. Sept 2026: most recent distribution 0% ROC/100% real
+                            # family as AMDY (exited 2026-11-20). Sept 2026: most recent distribution 0% ROC/100% real
                             # income, healthiest reading of any single-stock fund researched -- but
                             # +308.65% 1yr total return vs only +7.57%/yr since inception shows a
                             # rough multi-year stretch before this recent spike
     account: roth
-    sub_weight: 0.50  # per-tier share of new Tier 3 capital -- rebalanced Sept 2026, no longer just a starter position, targeting 50/50 with AMDY
+    sub_weight: 1.00  # sole Tier 3 holding since AMDY exit 2026-11-20 (was 0.50 in a 50/50 split with AMDY)
 
   - symbol: QQQI
     tier: 2                # Nasdaq-100 partial covered call (NEOS) -- replaced XYLD Sept 2026

@@ -16,10 +16,6 @@ positions:
     account: roth
     shares: 1199.755909
 
-  - symbol: AMDY
-    account: roth
-    shares: 89.297757
-
   - symbol: QQQI
     account: roth
     shares: 142.109194
