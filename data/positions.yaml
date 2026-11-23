@@ -22,7 +22,7 @@ positions:
 
   - symbol: MRNY
     account: roth
-    shares: 111.850803
+    shares: 172.557204
 
   # Traditional IRA -- new as of Sept 2026, Roth contributions blocked by MFS filing status
   - symbol: QQQI
